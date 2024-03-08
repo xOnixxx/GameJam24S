@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    public static SoundManager Instance;
+
     public int minimumSoundSources = 8;
     public int minimumMusicSources = 2;
     public List<AudioSource> inactiveAudioSources = new();
@@ -12,8 +14,14 @@ public class SoundManager : MonoBehaviour
     public List<AudioSource> activeMusicSources = new();
     public Dictionary<string, AudioClip> audioClips = new();
     public Dictionary<string, AudioClip> musicClips = new();
-    void Start()
+    void Awake()
     {
+        if(Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
         for (int i = 0; i < minimumSoundSources; i++)
         {
             inactiveAudioSources.Add(gameObject.AddComponent<AudioSource>());
