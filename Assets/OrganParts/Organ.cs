@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Organ : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+public enum organType
+{
+    Digestion,
+    Circulation
+}
+
+
+
+public interface Organ
+{
+    Sprite selfImage { get; set; }
+    PolygonCollider2D fungiZone { get; set;}
+    PolygonCollider2D ailmentZone { get; set; }
+    float severity { get; set; }
+
+
+
 }
