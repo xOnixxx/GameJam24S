@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.U2D.Path;
 using UnityEngine;
 
 
@@ -7,18 +8,28 @@ using UnityEngine;
 public enum organType
 {
     Digestion,
-    Circulation
+    Circulation,
+    Skeletal,
+    Occult
 }
 
 
 
-public interface Organ
+public class Organ : MonoBehaviour
 {
-    Sprite selfImage { get; set; }
-    PolygonCollider2D fungiZone { get; set;}
-    PolygonCollider2D ailmentZone { get; set; }
-    float severity { get; set; }
+    public Sprite hammeredImage;
+    public PolygonCollider2D fungiZone;
+    public PolygonCollider2D ailmentZone;
+    public float severity;
+    public organType organType;
 
-
+    private void OnMouseEnter()
+    {
+        Debug.Log("Entered!");
+    }
 
 }
+
+//TODO ADD SIGNAL FOR HAMMER
+
+
