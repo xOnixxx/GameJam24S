@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,10 +51,30 @@ public class HUD : MonoBehaviour
     public float gubermentSpeed = 0.5f;
     private bool gubermentOpened = false;
     [Header("Timer")]
+    public CanvasGroup timerContainer;
     public Text timerText;
+    public bool timerOn = false;
+    public float timerFadeSpeed = 0.3f;
     [Header("Funds")]
     public Text fundsCount;
-
+    private int m_currentFunds = 0;
+    public float fundsSpeed = 0.3f;
+    [Header("Quota Counter")]
+    public Text quotaCounter;
+    [Header("Day Counter")]
+    public Text dayCounter;
+    [Header("EndDayScreen")]
+    private int m_interimFunds;
+    private bool m_haveCompletedSummary = false;
+    public CanvasGroup endDayScreen;
+    public CanvasGroup advanceButton;
+    public Text caseSummary;
+    public Text caseRevenue;
+    public Text casePenalty;
+    public Text caseToolCost;
+    public Text fundSummary;
+    public Text caseCountSummary;
+    public Text message;
 
     public static HUD Instance;
     void Awake()
@@ -103,6 +124,10 @@ public class HUD : MonoBehaviour
         CheckConfirmEligibility();
     }
 
+    private void Start()
+    {
+        m_currentFunds = PlayerState.Instance.currentMoney;
+    }
     public void InteractWithToolDrawer()
     {
         if(toolsOpened)
@@ -303,7 +328,58 @@ public class HUD : MonoBehaviour
 
     public void UpdateFundsCount()
     {
-        fundsCount.DOKill();
-        //fundsCount.DO
+        DOVirtual.Int(m_currentFunds, PlayerState.Instance.currentMoney, fundsSpeed, (v) => fundsCount.text = v.ToString() + "€");
+        m_currentFunds = PlayerState.Instance.currentMoney;
+        //DOTween.To(() => m_currentFunds, x => m_currentFunds = x ,PlayerState.Instance.currentMoney, fundsSpeed);
+    }
+
+    public void EnableTimer()
+    {
+        timerOn = true;
+        timerContainer.DOFade(1, timerFadeSpeed);
+    }
+
+    public void DisableTimer()
+    {
+        timerOn = false;
+        timerContainer.DOFade(0, timerFadeSpeed);
+    }
+
+    private void Update()
+    {
+        if (timerOn)
+        {
+            TimeSpan time = TimeSpan.FromSeconds(Mathf.Max(0,DayManager.Instance.timerStart  - Time.time + DayManager.Instance.timerLength));
+            timerText.text = time.ToString("hh':'mm':'ss");
+        }
+    }
+
+    public void UpdateQuota() 
+    {
+        quotaCounter.text = Mathf.Min(PlayerState.Instance.dayStats.Count,DayManager.Instance.currentQuota).ToString() + "/" + DayManager.Instance.currentQuota;
+    }
+
+    public void UpdateDay()
+    {
+        dayCounter.text = "Day #" + DayManager.Instance.currentDay.ToString();
+    }
+
+    public void TestNumbers()
+    {
+        DayManager.Instance.quotaCompleted = true;
+        EnableTimer();
+        DayManager.Instance.timerStart = Time.time;
+        PlayerState.Instance.UpdateCurrentMoney(-17);
+    }
+
+    public void SupremeButtonForFilip()
+    {
+        DayManager.Instance.creator.GenerateCase();
+    }
+
+    public void StartResults()
+    {
+        DisableTimer();
+        
     }
 }

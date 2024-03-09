@@ -48,9 +48,15 @@ public class PlayerState : MonoBehaviour
         UpdateCurrentMoney(-amount);
         DayManager.Instance.currentToolCost += amount;
     }
+    public void IncreasePenalty(int amount)
+    {
+        UpdateCurrentMoney(-amount);
+        DayManager.Instance.currentPenalty += amount;
+    }
     
     public void UpdateCurrentMoney(int change)
     {
         currentMoney += change;
+        HUD.Instance.UpdateFundsCount();
     }
 }
