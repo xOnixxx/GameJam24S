@@ -16,6 +16,7 @@ public class DayManager : MonoBehaviour
     public int failurePenalty = 15;
     public int governmentMultiplier = 2;
     public static DayManager Instance;
+    public CaseCreator creator;
     [Header("Quota Information")]
     public int currentQuota;
     public bool quotaCompleted;
@@ -70,7 +71,7 @@ public class DayManager : MonoBehaviour
 
     public void GetNewOrgan()
     {
-        //Generate new organ
+        currentCase = creator.GenerateCase();
         currentPenalty = 0;
         currentToolCost = 0;
     }
@@ -115,6 +116,7 @@ public class DayManager : MonoBehaviour
     {
         priceIncrease += rateOfPriceIncrease;
         quotaCompleted = false;
+        UVOn = false;
         currentQuota = Random.Range(minimumQuota, maximumQuota + 1);
         GenerateNewEvents();
         PlayerState.Instance.StartNewDay();

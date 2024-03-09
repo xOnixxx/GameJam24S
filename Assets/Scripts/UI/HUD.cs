@@ -49,6 +49,10 @@ public class HUD : MonoBehaviour
     public Vector2 maximumMaxAnchorGov = new(0.44f, 0.95f);
     public float gubermentSpeed = 0.5f;
     private bool gubermentOpened = false;
+    [Header("Timer")]
+    public Text timerText;
+    [Header("Funds")]
+    public Text fundsCount;
 
 
     public static HUD Instance;
@@ -295,5 +299,11 @@ public class HUD : MonoBehaviour
         gubermentPanel.DOAnchorMin(minimumMinAnchorGov, gubermentSpeed);
         gubermentPanel.DOAnchorMax(minimumMaxAnchorGov, gubermentSpeed);
         gubermentOpened = false;
+    }
+
+    public void UpdateFundsCount()
+    {
+        fundsCount.DOKill();
+        //fundsCount.DO
     }
 }

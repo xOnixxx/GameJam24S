@@ -32,6 +32,7 @@ public class LevelElements : MonoBehaviour
         interactableFreezer.interactable = false;
         interactableFreezer.blocksRaycasts = false;
         DayManager.Instance.hasActiveCase = true;
+        DayManager.Instance.GetNewOrgan();
         HUD.Instance.CheckConfirmEligibility();
         //Move whole line
         foreach (var freezer in freezerLine)
