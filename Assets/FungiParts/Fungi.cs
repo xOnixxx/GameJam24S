@@ -10,7 +10,7 @@ public class Fungi : MonoBehaviour
     public List<GameObject> immatureParts = new List<GameObject>();
     public List<GameObject> ailments = new List<GameObject>();
     //public List<GameObject> bloodParticles = new List<GameObject>();
-    public List<Organ> acceptedOrgans = new List<Organ>();
+    public List<organType> acceptedOrgans = new List<organType>();
 
     public List<Tool> strongAgainst;
     public List<Tool> weakAgainst;
