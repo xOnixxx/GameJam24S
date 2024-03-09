@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Fungi : MonoBehaviour
 {
+    public int ID;
     public GameObject attachedOrgan;
     public List<GameObject> matureParts = new List<GameObject>();
     public List<GameObject> immatureParts = new List<GameObject>();
@@ -31,6 +32,8 @@ public class Fungi : MonoBehaviour
     public Color uvColoring;
     public float sporeProb;
 
+    public float rotationLimit;
+
     private bool spores;
     private List<GameObject> spawnedParts = new List<GameObject>();
 
@@ -44,7 +47,8 @@ public class Fungi : MonoBehaviour
 
     public void Spread()
     {
-        Quaternion qr = Random.rotation;
+        //Quaternion qr = Random.rotation;
+        Quaternion qr = Quaternion.identity;
         qr.x = 0;
         qr.y = 0;
         List<Vector3> fungiPoint = GenerateSpread();
@@ -98,12 +102,6 @@ public class Fungi : MonoBehaviour
         Destroy(td);
     }
     
-
-    private void OnMouseDown()
-    {
-        Debug.Log("Click!");
-        Spread();
-    }
 
 }
 

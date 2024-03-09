@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: ecc32713d91808441a7fe7aa47bed804
+=======
+guid: fc6e767bd45f47c4886b51385b78619e
+>>>>>>> Roman
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
