@@ -57,8 +57,8 @@ MonoBehaviour:
   strongAgainst: []
   weakAgainst: []
   depthMycelium: 0
-  minCount: 0
-  maxCount: 0
+  minCount: 3
+  maxCount: 5
   minClusterS: 0
   maxClusterS: 0
   minClusterCount: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   spreadSize: 0
   spread: 0
   uvSensitive: 1
-  uvColoring: {r: 0.64139885, g: 0.078987174, b: 0.6698113, a: 0}
-  originalColor: {r: 0.6603774, g: 0.19825718, b: 0.109024554, a: 0}
+  uvColoring: {r: 0.64139885, g: 0.078987174, b: 0.6698113, a: 1}
+  originalColor: {r: 0.6603774, g: 0.19825718, b: 0.109024554, a: 1}
   sporeProb: 0
   rotationLimit: 0

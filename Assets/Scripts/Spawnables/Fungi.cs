@@ -13,8 +13,8 @@ public class Fungi : MonoBehaviour
     //public List<GameObject> bloodParticles = new List<GameObject>();
     public List<organType> acceptedOrgans = new List<organType>();
 
-    public List<Tool> strongAgainst;
-    public List<Tool> weakAgainst;
+    public List<toolType> strongAgainst;
+    public List<toolType> weakAgainst;
     public float depthMycelium;
     public int minCount;
     public int maxCount;
@@ -38,15 +38,20 @@ public class Fungi : MonoBehaviour
 
     private bool spores;
     private List<GameObject> spawnedParts = new List<GameObject>();
-    private Color originalColoring;
 
     //TODO Spred types
     public void Start()
     {
         spores = (Random.value < sporeProb);
+    }
+
+    public void Infect(GameObject Organ)
+    {
+        attachedOrgan = Organ;
         Spread();
         StartColor();
     }
+
 
     public void Spread()
     {
@@ -115,6 +120,7 @@ public class Fungi : MonoBehaviour
         {
             UVLightOff();
         }
+        else
         {
             if (PlayerState.Instance.currentMoney > activeTool.price + DayManager.Instance.priceIncrease)
             {
@@ -132,6 +138,7 @@ public class Fungi : MonoBehaviour
 
     private void ToolSelection(Tool activeTool)
     {
+
         switch (activeTool.toolName)
         {
             case toolType.scalpel:
