@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Search;
+using UnityEditor.UI;
 using UnityEngine;
 
 public class Fungi : MonoBehaviour
@@ -69,6 +70,7 @@ public class Fungi : MonoBehaviour
             
             qr = Quaternion.Euler(0, 0, Random.Range(0, 90) - 45);
             var t1 = Instantiate(activeSprites[Random.Range(0, activeSprites.Count - 1)], p, qr);
+            t1.transform.SetParent(this.transform,false);
             t1.transform.localScale = t1.transform.localScale * ((float)Random.Range(70, 100) / 100);
             spawnedParts.Add(t1);
         }
