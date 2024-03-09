@@ -33,6 +33,8 @@ public class CaseCreator : MonoBehaviour
         Transform tO = organ.transform;
         Transform tF = fungi.transform;
 
+        SpriteRenderer rO = organ.GetComponentInChildren<SpriteRenderer>();
+        rO.enabled = true;
 
 
         tO.DOMove(new Vector3(0, -1f, 2), 1).SetEase(Ease.InCubic);
@@ -41,20 +43,8 @@ public class CaseCreator : MonoBehaviour
         tO.DOScale(new Vector3(2, 2, 1), 1);
         tF.DOScale(new Vector3(2, 2, 1), 1);
 
+
+
     }
 
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

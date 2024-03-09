@@ -34,16 +34,19 @@ public class Fungi : MonoBehaviour
     public Color uvColoring;
     public Color originalColor;
     public float sporeProb;
+    public float matureProb;
 
-    public float rotationLimit;
+    public float weaknesMod;
 
     private bool spores;
+    private bool isMature;
     private List<GameObject> spawnedParts = new List<GameObject>();
 
     //TODO Spred types
     public void Start()
     {
         spores = (Random.value < sporeProb);
+        isMature = (Random.value < matureProb);
     }
 
     public void Infect(GameObject Organ)
@@ -63,7 +66,7 @@ public class Fungi : MonoBehaviour
         List<Vector3> fungiPoint = GenerateSpread();
         List<GameObject> activeSprites;
 
-        if (spores ) { activeSprites = matureParts; }
+        if (isMature) { activeSprites = matureParts; }
         else{ activeSprites = immatureParts; }
         foreach (Vector3 p in fungiPoint)
         {
@@ -120,6 +123,7 @@ public class Fungi : MonoBehaviour
         Tool activeTool = DayManager.Instance.currentSelectedTool;
         if (activeTool.toolName == toolType.UVlight && DayManager.Instance.UVOn)
         {
+            DayManager.Instance.UVOn = false;
             UVLightOff();
         }
         else
@@ -143,10 +147,16 @@ public class Fungi : MonoBehaviour
 
     private void ToolSelection(Tool activeTool)
     {
-
+        if (strongAgainst.Contains(activeTool.toolName))
+        {
+            if (Random.value < weaknesMod) {
+                Debug.Log("Shroom too stronk");
+                return; }
+        }
         switch (activeTool.toolName)
         {
             case toolType.scalpel:
+                if (spores) { Debug.Log("BOOOM!"); }
                 Debug.Log(depthMycelium);
                 break;
             case toolType.syringeCheap:
@@ -157,12 +167,16 @@ public class Fungi : MonoBehaviour
                 break;
             case toolType.UVlight:
                 Debug.Log("Change lights");
+                DayManager.Instance.UVOn = true;
                 UVLightActive();
                 break;
             case toolType.fastGrowth:
                 Debug.Log("Show growth!");
+                Sprite toShow = matureParts[Random.Range(0, matureParts.Count -1)].GetComponent<SpriteRenderer>().sprite;
+                //TODO SHOW WINDOW WITH MEAT AND MATURED SHROOM/JUST MATURED SHROOM
                 break;
             case toolType.sporeDetector:
+                //return spore
                 Debug.Log(spores);
                 break;
             default: return;
@@ -171,6 +185,7 @@ public class Fungi : MonoBehaviour
 
     private void UVLightActive()
     {
+
         foreach (GameObject fungiParts in spawnedParts)
         {
             fungiParts.GetComponent<SpriteRenderer>().color = uvColoring;
