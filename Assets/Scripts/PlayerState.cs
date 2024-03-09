@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public struct CaseReport 
 {
-    int Income;
-    int Penalty;
-    int ToolLoss;
+    public int Income;
+    public int Penalty;
+    public int ToolLoss;
 
     public CaseReport(int income, int penalty, int toolloss)
     {
