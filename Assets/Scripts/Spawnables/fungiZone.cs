@@ -40,6 +40,7 @@ public class fungiZone : MonoBehaviour
 
             Debug.Log(x + " " + y);
             points.Add(new Vector3(x, y, 0));
+            attempt = 0;
             x = 0;
             y = 0;
         }
