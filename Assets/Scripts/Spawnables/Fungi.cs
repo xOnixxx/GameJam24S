@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Search;
 using UnityEngine;
 
 public class Fungi : MonoBehaviour
@@ -43,8 +44,8 @@ public class Fungi : MonoBehaviour
     public void Start()
     {
         spores = (Random.value < sporeProb);
-
         Spread();
+        StartColor();
     }
 
     public void Spread()
@@ -60,10 +61,11 @@ public class Fungi : MonoBehaviour
         else{ activeSprites = immatureParts; }
         foreach (Vector3 p in fungiPoint)
         {
-            qr = Random.rotation;
-            qr.x = 0;
-            qr.y = 0;
-            spawnedParts.Add(Instantiate(activeSprites[0], p, qr));
+            
+            qr = Quaternion.Euler(0, 0, Random.Range(0, 90) - 45);
+            var t1 = Instantiate(activeSprites[Random.Range(0, activeSprites.Count - 1)], p, qr);
+            t1.transform.localScale = t1.transform.localScale * ((float)Random.Range(70, 100) / 100);
+            spawnedParts.Add(t1);
         }
 
 
@@ -109,16 +111,22 @@ public class Fungi : MonoBehaviour
     {
         
         Tool activeTool = DayManager.Instance.currentSelectedTool;
-        //if (activeTool.toolName == toolType.UVlight && DayManager.Instance.UV)
-        if (PlayerState.Instance.currentMoney > activeTool.price + DayManager.Instance.priceIncrease)
+        if (activeTool.toolName == toolType.UVlight && DayManager.Instance.UVOn)
         {
-            if (Random.value < activeTool.dependency)
-            {
-                ToolSelection(activeTool);
-            }
-            else { Debug.Log("Skill issue!"); }
+            UVLightOff();
         }
-        else { Debug.Log("Sorry u broke!"); }
+        {
+            if (PlayerState.Instance.currentMoney > activeTool.price + DayManager.Instance.priceIncrease)
+            {
+                if (Random.value < activeTool.dependency)
+                {
+                    ToolSelection(activeTool);
+                }
+                else { Debug.Log("Skill issue!"); }
+            }
+            else { Debug.Log("Sorry u broke!"); }
+        }
+
 
     }
 
@@ -161,7 +169,15 @@ public class Fungi : MonoBehaviour
     {
         foreach (GameObject fungiParts in spawnedParts)
         {
-            fungiParts.GetComponent<SpriteRenderer>().color = originalColoring;
+            fungiParts.GetComponent<SpriteRenderer>().color = originalColor;
+        }
+    }
+
+    private void StartColor()
+    {
+        foreach (GameObject fungiParts in spawnedParts)
+        {
+            fungiParts.GetComponent<SpriteRenderer>().color = originalColor;
         }
     }
 

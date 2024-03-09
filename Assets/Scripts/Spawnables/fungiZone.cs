@@ -15,9 +15,7 @@ public class fungiZone : MonoBehaviour
 
     private void Start()
     {
-        box = GetComponent<BoxCollider2D>();
-        polygon = GetComponent<PolygonCollider2D>();
-        boxBounds = box.bounds;
+
     }
 
 
@@ -25,16 +23,18 @@ public class fungiZone : MonoBehaviour
     {
         box = GetComponent<BoxCollider2D>();
         polygon = GetComponent<PolygonCollider2D>();
+        boxBounds = box.bounds;
         List<Vector3> points = new List<Vector3>();
-        float x = 0;
-        float y = 0;
+        float x = -9999;
+        float y = -9999;
         int attempt = 0;
+
         for (int i = 0; i < size; i++)
         {
             while (!polygon.OverlapPoint(new Vector2(x, y)) || attempt < 100)
-            {
-                x = Random.Range(boxBounds.min.x, boxBounds.max.x);
-                y = Random.Range(boxBounds.min.y, boxBounds.max.y);
+            {   
+               x = Random.Range(boxBounds.min.x, boxBounds.max.x);
+               y = Random.Range(boxBounds.min.y, boxBounds.max.y);
                attempt++; 
             }
 
@@ -49,6 +49,9 @@ public class fungiZone : MonoBehaviour
 
     public List<Vector3> GenerateCluster(int size, float range)
     {
+        box = GetComponent<BoxCollider2D>();
+        polygon = GetComponent<PolygonCollider2D>();
+        boxBounds = box.bounds;
         Vector3 center = this.NormalDistribution(1)[0];
         List<Vector3> points = new List<Vector3>();
         int attempt = 0;
@@ -75,6 +78,9 @@ public class fungiZone : MonoBehaviour
     }
 
     public List<Vector3> GenerateMultipleClusters(int clusterNum, int clusterSize, float range) {
+        box = GetComponent<BoxCollider2D>();
+        polygon = GetComponent<PolygonCollider2D>();
+        boxBounds = box.bounds;
         List<Vector3> points = new List<Vector3>();
 
         for (int i = 0; i < clusterNum; i++)
