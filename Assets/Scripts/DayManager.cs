@@ -21,12 +21,22 @@ public class DayManager : MonoBehaviour
     public float desiredProbability = 0.02f;
     public int fungiVariationCount = 10;
     public Dictionary<int, bool> currentDesiredFungi = new();
-
+    
+    [HideInInspector]
+    public (Fungi, Organ) currentCase;
 
     [HideInInspector]
-    public int currentRevenue;
-    public int currentPenalty;
-    public int currentToolCost;
+    public int currentRevenue = 0;
+    [HideInInspector]
+    public int currentPenalty = 0;
+    [HideInInspector]
+    public int currentToolCost = 0;
+
+    private int m_selectedTool;
+    private int m_fungiID;
+    [Header("Tools")]
+    public List<Tool> toolSelection = new();
+    public Tool currentSelectedTool { get { return toolSelection[m_selectedTool]; } }
 
     void Awake()
     {
@@ -53,7 +63,7 @@ public class DayManager : MonoBehaviour
 
     public void Update()
     {
-        if(quotaCompleted && Time.time - timerLength > timerLength)
+        if(quotaCompleted && Time.time - timerStart > timerLength)
         {
             //Add call for result screen
             quotaCompleted = false;
@@ -95,5 +105,18 @@ public class DayManager : MonoBehaviour
         GenerateNewEvents();
         PlayerState.Instance.StartNewDay();
 
+    }
+
+    public void ChangeSelectedTool(int index)
+    {
+        m_selectedTool = index;
+    }
+    public void ChangeSelectedFungi(int id)
+    {
+        m_fungiID = id;
+    }
+
+    public void EvaluateChoice()
+    {
     }
 }
