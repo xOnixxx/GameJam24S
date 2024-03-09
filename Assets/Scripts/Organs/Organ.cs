@@ -18,8 +18,10 @@ public enum organType
 public class Organ : MonoBehaviour
 {
     public Sprite hammeredImage;
+    public Sprite organSelf;
+    public Sprite container;
     public PolygonCollider2D fungiZone;
-    public PolygonCollider2D ailmentZone;
+    public List<PolygonCollider2D> ailmentZone;
     public float severity;
     public organType organType;
 
