@@ -128,7 +128,7 @@ public class DayManager : MonoBehaviour
         GenerateNewEvents();
         PlayerState.Instance.StartNewDay();
         HUD.Instance.UpdateDay();
-
+        HUD.Instance.UpdatePrices();
     }
 
     public void ChangeSelectedTool(int index)

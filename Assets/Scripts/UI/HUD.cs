@@ -8,6 +8,7 @@ public class HUD : MonoBehaviour
 {
     [Header("Tool Container")]
     public GameObject toolContainer;
+    public List<Text> toolPrices;
     public float timeToOpenTools = 0.5f;
     public Vector2 minimumMinAnchorTools = new(0.2f,0.1f);
     public Vector2 maximumMinAnchorTools = new(0.8f,0.1f);
@@ -63,9 +64,10 @@ public class HUD : MonoBehaviour
     public Text quotaCounter;
     [Header("Day Counter")]
     public Text dayCounter;
-    [Header("EndDayScreen")]
+
     private int m_interimFunds;
     private bool m_haveCompletedSummary = false;
+    [Header("EndDayScreen")]
     public CanvasGroup endDayScreen;
     public CanvasGroup advanceButton;
     public Text caseSummary;
@@ -73,8 +75,11 @@ public class HUD : MonoBehaviour
     public Text casePenalty;
     public Text caseToolCost;
     public Text fundSummary;
-    public Text caseCountSummary;
+    public Text startingFunds;
     public Text message;
+    public float speedOfSummary = 0.5f;
+    public int currentCase = 0;
+    public float delayBetweenSummary = 0.5f;
 
     public static HUD Instance;
     void Awake()
@@ -121,12 +126,15 @@ public class HUD : MonoBehaviour
         {
             SetCanvasGroup(encyPages[i], i == m_currentPage, i == m_currentPage ? 1 : 0);
         }
-        CheckConfirmEligibility();
+        //CheckConfirmEligibility();
     }
 
     private void Start()
     {
         m_currentFunds = PlayerState.Instance.currentMoney;
+        CheckConfirmEligibility();
+        UpdateDay();
+        UpdateQuota();
     }
     public void InteractWithToolDrawer()
     {
@@ -356,7 +364,7 @@ public class HUD : MonoBehaviour
 
     public void UpdateQuota() 
     {
-        quotaCounter.text = Mathf.Min(PlayerState.Instance.dayStats.Count,DayManager.Instance.currentQuota).ToString() + "/" + DayManager.Instance.currentQuota;
+        quotaCounter.text = Mathf.Min(DayManager.Instance.quotaProgress,DayManager.Instance.currentQuota).ToString() + "/" + DayManager.Instance.currentQuota;
     }
 
     public void UpdateDay()
@@ -366,6 +374,7 @@ public class HUD : MonoBehaviour
 
     public void TestNumbers()
     {
+        UpdatePrices();
         DayManager.Instance.quotaCompleted = true;
         EnableTimer();
         DayManager.Instance.timerStart = Time.time;
@@ -380,6 +389,75 @@ public class HUD : MonoBehaviour
     public void StartResults()
     {
         DisableTimer();
-        
+        startingFunds.text = PlayerState.Instance.startingMoney.ToString();
+        SetCanvasGroup(endDayScreen, true, 0);
+        endDayScreen.DOFade(1, speedOfSummary);
+        MoveOneCaseForward();
+        m_haveCompletedSummary = false;
+        SetCanvasGroup(advanceButton, true);
+    }
+
+    public void MoveOneCaseForward()
+    {
+        if(currentCase == PlayerState.Instance.dayStats.Count)
+        {
+            m_haveCompletedSummary = true;
+            FinishResults();
+            return;
+        }
+        CaseReport curCase = PlayerState.Instance.dayStats[currentCase];
+        caseSummary.text = "Case #" + (currentCase + 1).ToString();
+        currentCase++;
+        int totalChange = curCase.Income + curCase.Penalty + curCase.ToolLoss;
+        //DOVirtual.Int(m_currentFunds, PlayerState.Instance.currentMoney, fundsSpeed, (v) => fundsCount.text = v.ToString() + "MshC");
+        DOVirtual.Int(curCase.Income, 0, speedOfSummary, (v) => caseRevenue.text = "Revenue : " + v.ToString()+ " MshC");
+        DOVirtual.Int(curCase.Penalty, 0, speedOfSummary, (v) => casePenalty.text = "Penalty : " + v.ToString()+ " MshC");
+        DOVirtual.Int(curCase.ToolLoss, 0, speedOfSummary, (v) => caseToolCost.text = "Cost of Tools : " + v.ToString() +" MshC");
+        DOVirtual.Int(m_interimFunds, m_interimFunds + totalChange, speedOfSummary, (v) => fundSummary.text = v.ToString() + " MshC").onComplete = DoDelay;
+    }
+    public void FinishResults()
+    {
+        SetCanvasGroup(endDayScreen, false, 1);
+        endDayScreen.DOFade(0, speedOfSummary);
+        DayManager.Instance.StartNewDay();
+    }
+
+    public void SkipSummary()
+    {
+        if (!m_haveCompletedSummary)
+        {
+            m_haveCompletedSummary = true;
+            DOVirtual.Int(m_interimFunds, m_currentFunds, speedOfSummary, (v) => fundSummary.text = v.ToString() + " MshC");
+            caseSummary.text = "Case #" + (PlayerState.Instance.dayStats.Count).ToString();
+        }
+        else
+        {
+            SetCanvasGroup(advanceButton, false);
+            FinishResults();
+        }
+    }
+    
+    public void TestResultScreen()
+    {
+        StartResults();
+    }
+
+
+    private void DoDelay()
+    {
+        StartCoroutine(DelayBetweenSummary());
+    }
+    private IEnumerator DelayBetweenSummary()
+    {
+        yield return new WaitForSeconds(delayBetweenSummary);
+        MoveOneCaseForward();
+    }
+
+    public void UpdatePrices()
+    {
+        for (int i = 0; i < toolPrices.Count; i++)
+        {
+            toolPrices[i].text = (DayManager.Instance.toolSelection[i].price + DayManager.Instance.priceIncrease).ToString() + " MshC";
+        }
     }
 }
