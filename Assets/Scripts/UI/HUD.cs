@@ -31,16 +31,24 @@ public class HUD : MonoBehaviour
     public CanvasGroup releaseButton;
     public CanvasGroup confirmChoiceButton;
     [Header("Tool Result Folder")]
-    public Vector2 startResultAnchor = new Vector2(0.1f, 0.1f);
-    public Vector2 tabSize = new Vector2(0.12f, 0.1f);
-    public List<string> tabTitles = new ()
-    { 
-        "Incision",
-        "Grown body",
-        "UV colour",
-        "Spores",
-        "Blood"
-    };  
+    public Vector2 minimumMinAnchorResults = new(0.05f,-0.5f);
+    public Vector2 minimumMaxAnchorResults = new(0.6f,0.08f);
+    public Vector2 maximumMinAnchorResults = new(0.05f,0f);
+    public Vector2 maximumMaxAnchorResults = new(0.6f,0.58f);
+    private int m_currentTab = 0;
+    public RectTransform resultsFolder;
+    public List<CanvasGroup> tabHeaders = new();
+    public List<CanvasGroup> tabs = new();
+    private bool resultsOpened = false;
+    public float resultsSpeed = 0.5f;
+    [Header("Guberment Panel")]
+    public RectTransform gubermentPanel;
+    public Vector2 minimumMinAnchorGov = new(-0.4f, 0.65f);
+    public Vector2 minimumMaxAnchorGov = new(0.04f, 0.95f);
+    public Vector2 maximumMinAnchorGov = new(0f, 0.65f);
+    public Vector2 maximumMaxAnchorGov = new(0.44f, 0.95f);
+    public float gubermentSpeed = 0.5f;
+    private bool gubermentOpened = false;
 
 
     public static HUD Instance;
@@ -224,5 +232,68 @@ public class HUD : MonoBehaviour
         {
             SetCanvasGroup(confirmChoiceButton, false);
         }
+    }
+
+    public void ClickOnResultsFolder()
+    { 
+        if(resultsOpened)
+        {
+            CloseResults();
+        }
+        else
+        {
+            OpenResults();
+        }
+    }
+    public void OpenResults()
+    {
+        resultsFolder.DOAnchorMin(maximumMinAnchorResults, resultsSpeed);
+        resultsFolder.DOAnchorMax(maximumMaxAnchorResults,resultsSpeed);
+        resultsOpened = true;
+
+    }
+    public void CloseResults()
+    {
+        resultsFolder.DOAnchorMin(minimumMinAnchorResults, resultsSpeed);
+        resultsFolder.DOAnchorMax(minimumMaxAnchorResults, resultsSpeed);
+        resultsOpened = false;
+    }
+    public void ClickOnTab(int id)
+    {
+        SetCanvasGroup(tabHeaders[id], false);
+        SetCanvasGroup(tabHeaders[m_currentTab], true);
+        SetCanvasGroup(tabs[id], false, 1);
+        SetCanvasGroup(tabs[m_currentTab], false, 0);
+        m_currentTab = id;
+    }
+    public void RevealTab(int id)
+    {
+        SetCanvasGroup(tabHeaders[id], m_currentTab != id, 1);
+    }
+
+    public void ClickOnGuberment()
+    {
+        if(gubermentOpened)
+        {
+            CloseGuberment();
+        }
+        else
+        {
+            OpenGuberment();
+        }
+    }
+
+    public void OpenGuberment()
+    {
+        gubermentPanel.DOAnchorMin(maximumMinAnchorGov, gubermentSpeed);
+        gubermentPanel.DOAnchorMax(maximumMaxAnchorGov, gubermentSpeed);
+        gubermentOpened = true;
+    }
+    
+    public void CloseGuberment()
+    {
+        gubermentPanel.DOAnchorMin(minimumMinAnchorGov, gubermentSpeed);
+        gubermentPanel.DOAnchorMax(minimumMaxAnchorGov, gubermentSpeed);
+        gubermentOpened = false;
     }
 }
