@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Search;
+using UnityEditor.UI;
 using UnityEngine;
 
 public class Fungi : MonoBehaviour
@@ -69,6 +70,7 @@ public class Fungi : MonoBehaviour
             
             qr = Quaternion.Euler(0, 0, Random.Range(0, 90) - 45);
             var t1 = Instantiate(activeSprites[Random.Range(0, activeSprites.Count - 1)], p, qr);
+            t1.transform.SetParent(this.transform,false);
             t1.transform.localScale = t1.transform.localScale * ((float)Random.Range(70, 100) / 100);
             spawnedParts.Add(t1);
         }
@@ -122,7 +124,7 @@ public class Fungi : MonoBehaviour
         }
         else
         {
-            if (PlayerState.Instance.currentMoney > activeTool.price + DayManager.Instance.priceIncrease)
+            if (PlayerState.Instance.currentMoney > (activeTool.price + DayManager.Instance.priceIncrease))
             {
                 if (Random.value < activeTool.dependency)
                 {
@@ -130,7 +132,10 @@ public class Fungi : MonoBehaviour
                 }
                 else { Debug.Log("Skill issue!"); }
             }
-            else { Debug.Log("Sorry u broke!"); }
+            else {
+                Debug.Log(activeTool.price + " " + DayManager.Instance.priceIncrease);
+                Debug.Log(PlayerState.Instance.currentMoney);
+                Debug.Log("Sorry u broke!"); }
         }
 
 

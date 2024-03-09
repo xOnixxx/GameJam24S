@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using DG.Tweening;
 
 public class CaseCreator : MonoBehaviour
 {
@@ -18,16 +19,28 @@ public class CaseCreator : MonoBehaviour
         int fungiID = UnityEngine.Random.Range(0, fungiList.Count - 1);
         var fungi = Instantiate<GameObject>(fungiList[fungiID]);
         var organ = Instantiate<GameObject>(organList[organID]);
-        PlaceOrgan(organ);
+        PlaceOrgan(organ, fungi);
         fungi.GetComponent<Fungi>().Infect(organ);
         (Fungi,Organ) temp1 = (fungi.GetComponent<Fungi>(), organ.GetComponent<Organ>());
 
         return temp1;
     }
 
-    public void PlaceOrgan(GameObject organ)
+    public void PlaceOrgan(GameObject organ, GameObject fungi)
     {
-        organ.transform.position = Vector3.one;
+        organ.transform.position = new Vector3(-10, -2.7f, 2);
+        fungi.transform.position = new Vector3(-10, -2.7f, 1);
+        Transform tO = organ.transform;
+        Transform tF = fungi.transform;
+
+
+
+        tO.DOMove(new Vector3(0, -1f, 2), 1).SetEase(Ease.InCubic);
+        tF.DOMove(new Vector3(0, -1f, 1), 1).SetEase(Ease.InCubic);
+
+        tO.DOScale(new Vector3(2, 2, 1), 1);
+        tF.DOScale(new Vector3(2, 2, 1), 1);
+
     }
 
 
