@@ -408,12 +408,13 @@ public class HUD : MonoBehaviour
         CaseReport curCase = PlayerState.Instance.dayStats[currentCase];
         caseSummary.text = "Case #" + (currentCase + 1).ToString();
         currentCase++;
-        int totalChange = curCase.Income + curCase.Penalty + curCase.ToolLoss;
+        int totalChange = curCase.Income - curCase.Penalty - curCase.ToolLoss;
         //DOVirtual.Int(m_currentFunds, PlayerState.Instance.currentMoney, fundsSpeed, (v) => fundsCount.text = v.ToString() + "MshC");
         DOVirtual.Int(curCase.Income, 0, speedOfSummary, (v) => caseRevenue.text = "Revenue : " + v.ToString()+ " MshC");
         DOVirtual.Int(curCase.Penalty, 0, speedOfSummary, (v) => casePenalty.text = "Penalty : " + v.ToString()+ " MshC");
         DOVirtual.Int(curCase.ToolLoss, 0, speedOfSummary, (v) => caseToolCost.text = "Cost of Tools : " + v.ToString() +" MshC");
         DOVirtual.Int(m_interimFunds, m_interimFunds + totalChange, speedOfSummary, (v) => fundSummary.text = v.ToString() + " MshC").onComplete = DoDelay;
+        m_interimFunds += totalChange;
     }
     public void FinishResults()
     {
