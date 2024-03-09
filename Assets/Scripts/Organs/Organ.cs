@@ -7,10 +7,10 @@ using UnityEngine;
 
 public enum organType
 {
-    Digestion,
-    Circulation,
-    Skeletal,
-    Occult
+    Stomach,
+    Eyes,
+    Heart,
+    Brain
 }
 
 
