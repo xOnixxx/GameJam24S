@@ -124,7 +124,7 @@ public class Fungi : MonoBehaviour
         }
         else
         {
-            if (PlayerState.Instance.currentMoney > activeTool.price + DayManager.Instance.priceIncrease)
+            if (PlayerState.Instance.currentMoney > (activeTool.price + DayManager.Instance.priceIncrease))
             {
                 if (Random.value < activeTool.dependency)
                 {
@@ -132,7 +132,10 @@ public class Fungi : MonoBehaviour
                 }
                 else { Debug.Log("Skill issue!"); }
             }
-            else { Debug.Log("Sorry u broke!"); }
+            else {
+                Debug.Log(activeTool.price + " " + DayManager.Instance.priceIncrease);
+                Debug.Log(PlayerState.Instance.currentMoney);
+                Debug.Log("Sorry u broke!"); }
         }
 
 
