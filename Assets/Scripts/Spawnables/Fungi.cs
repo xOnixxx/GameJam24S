@@ -30,18 +30,20 @@ public class Fungi : MonoBehaviour
 
     public bool uvSensitive;
     public Color uvColoring;
+    public Color originalColor;
     public float sporeProb;
 
     public float rotationLimit;
 
     private bool spores;
     private List<GameObject> spawnedParts = new List<GameObject>();
-
+    private Color originalColoring;
 
     //TODO Spred types
     public void Start()
     {
         spores = (Random.value < sporeProb);
+
         Spread();
     }
 
@@ -102,6 +104,67 @@ public class Fungi : MonoBehaviour
         Destroy(td);
     }
     
+
+    public void UseTool()
+    {
+        
+        Tool activeTool = DayManager.Instance.currentSelectedTool;
+        //if (activeTool.toolName == toolType.UVlight && DayManager.Instance.UV)
+        if (PlayerState.Instance.currentMoney > activeTool.price + DayManager.Instance.priceIncrease)
+        {
+            if (Random.value < activeTool.dependency)
+            {
+                ToolSelection(activeTool);
+            }
+            else { Debug.Log("Skill issue!"); }
+        }
+        else { Debug.Log("Sorry u broke!"); }
+
+    }
+
+    private void ToolSelection(Tool activeTool)
+    {
+        switch (activeTool.toolName)
+        {
+            case toolType.scalpel:
+                Debug.Log(depthMycelium);
+                break;
+            case toolType.syringeCheap:
+                Debug.Log("Cheap blood!");
+                break;
+            case toolType.syringeExpansive:
+                Debug.Log("Expansice blood!");
+                break;
+            case toolType.UVlight:
+                Debug.Log("Change lights");
+                UVLightActive();
+                break;
+            case toolType.fastGrowth:
+                Debug.Log("Show growth!");
+                break;
+            case toolType.sporeDetector:
+                Debug.Log(spores);
+                break;
+            default: return;
+        }
+    }
+
+    private void UVLightActive()
+    {
+        foreach (GameObject fungiParts in spawnedParts)
+        {
+            fungiParts.GetComponent<SpriteRenderer>().color = uvColoring;
+        }
+    }
+
+    private void UVLightOff()
+    {
+        foreach (GameObject fungiParts in spawnedParts)
+        {
+            fungiParts.GetComponent<SpriteRenderer>().color = originalColoring;
+        }
+    }
+
 
 }
 

@@ -44,6 +44,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f87a81ed10f8646a5a75d1452fb101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 0
   attachedOrgan: {fileID: 0}
-  fungiParts:
-  - {fileID: 5922024785978335886, guid: 52ae39258862b574cad74107d26b022f, type: 3}
+  matureParts: []
+  immatureParts: []
+  ailments: []
+  acceptedOrgans: 
+  strongAgainst: []
+  weakAgainst: []
+  depthMycelium: 0
+  minCount: 0
+  maxCount: 0
+  minClusterS: 0
+  maxClusterS: 0
+  minClusterCount: 0
+  maxClusterCount: 0
+  spreadSize: 0
+  spread: 0
+  uvSensitive: 0
+  uvColoring: {r: 0, g: 0, b: 0, a: 0}
+  sporeProb: 0
+  rotationLimit: 0

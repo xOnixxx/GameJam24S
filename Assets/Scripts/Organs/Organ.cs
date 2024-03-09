@@ -10,7 +10,8 @@ public enum organType
     Stomach,
     Eyes,
     Heart,
-    Brain
+    Brain,
+    Intestine
 }
 
 

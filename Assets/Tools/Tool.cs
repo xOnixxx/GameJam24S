@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Tool : MonoBehaviour
 {
+
+    public toolType toolName;
     public int dependency;
     public float price;
     public Sprite toolSprite;
@@ -21,4 +23,14 @@ public class Tool : MonoBehaviour
     {
         
     }
+}
+
+public enum toolType
+{
+    scalpel,
+    syringeCheap,
+    syringeExpansive,
+    UVlight,
+    fastGrowth,
+    sporeDetector
 }

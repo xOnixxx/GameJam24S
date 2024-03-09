@@ -44,15 +44,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f87a81ed10f8646a5a75d1452fb101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 0
   attachedOrgan: {fileID: 0}
-  matureParts: []
-  immatureParts: []
+  matureParts:
+  - {fileID: 4136666948774889836, guid: 580236fd8cf34094b878561174da46cb, type: 3}
+  - {fileID: 4136666948774889836, guid: 6fb7c79817e693f4394830c3539fb035, type: 3}
+  - {fileID: 4136666948774889836, guid: 2fa821b2455e61f4fad6cc22d4444a10, type: 3}
+  immatureParts:
+  - {fileID: 0}
   ailments: []
-  acceptedOrgans: []
+  acceptedOrgans: 
   strongAgainst: []
   weakAgainst: []
   depthMycelium: 0
-  spores: 0
+  minCount: 0
+  maxCount: 0
+  minClusterS: 0
+  maxClusterS: 0
+  minClusterCount: 0
+  maxClusterCount: 0
+  spreadSize: 0
+  spread: 0
   uvSensitive: 0
   uvColoring: {r: 0, g: 0, b: 0, a: 0}
   sporeProb: 0
+  rotationLimit: 0
