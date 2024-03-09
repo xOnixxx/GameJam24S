@@ -20,10 +20,12 @@ public class DayManager : MonoBehaviour
     [Header("Quota Information")]
     public int currentQuota;
     public bool quotaCompleted;
+    public int quotaProgress = 0;
     public int minimumQuota = 4;
     public int maximumQuota = 8;
     [Header("Timer Information")]
-    private float timerStart;
+    [HideInInspector]
+    public float timerStart;
     public float timerLength;
     [Header("Events")]
     public int priceIncrease = 0;
@@ -80,7 +82,7 @@ public class DayManager : MonoBehaviour
     {
         if(quotaCompleted && Time.time - timerStart > timerLength)
         {
-            //Add call for result screen
+            HUD.Instance.StartResults();
             quotaCompleted = false;
         }
     }
@@ -105,8 +107,10 @@ public class DayManager : MonoBehaviour
     public void HandOffOrgan(int income,int penalty,int toolcost)
     {
         PlayerState.Instance.dayStats.Add(new(income,penalty,toolcost));
-        if(PlayerState.Instance.dayStats.Count == currentQuota)
+        if(income != 0) { quotaProgress++; HUD.Instance.UpdateQuota(); }
+        if(quotaProgress == currentQuota)
         {
+            HUD.Instance.EnableTimer();
             quotaCompleted = true;
             timerStart = Time.time;
         }
@@ -114,12 +118,16 @@ public class DayManager : MonoBehaviour
 
     public void StartNewDay()
     {
+        currentDay++;
         priceIncrease += rateOfPriceIncrease;
         quotaCompleted = false;
         UVOn = false;
+        quotaProgress = 0;
         currentQuota = Random.Range(minimumQuota, maximumQuota + 1);
+        HUD.Instance.UpdateQuota();
         GenerateNewEvents();
         PlayerState.Instance.StartNewDay();
+        HUD.Instance.UpdateDay();
 
     }
 
