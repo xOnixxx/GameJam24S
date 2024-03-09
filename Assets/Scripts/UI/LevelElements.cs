@@ -25,10 +25,16 @@ public class LevelElements : MonoBehaviour
 
     public void MoveFreezerLine()
     {
+        if(DayManager.Instance.hasActiveCase)
+        {
+            return;
+        }
         interactableFreezer.interactable = false;
         interactableFreezer.blocksRaycasts = false;
+        DayManager.Instance.hasActiveCase = true;
+        HUD.Instance.CheckConfirmEligibility();
         //Move whole line
-        foreach(var freezer in freezerLine)
+        foreach (var freezer in freezerLine)
         {
             freezer.DOAnchorMin(freezer.anchorMin + sizeOfFreezerMovement, speedOfFreezerMovement);
             freezer.DOAnchorMax(freezer.anchorMax + sizeOfFreezerMovement, speedOfFreezerMovement);

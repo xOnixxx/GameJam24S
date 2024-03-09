@@ -26,7 +26,21 @@ public class HUD : MonoBehaviour
     public Vector2 maximumMaxAnchorEncy = new(0.95f,0.7f);
     public float encySpeed = 0.5f;
     public bool encyOpened = false;
-
+    [Header("Fungi Fate Choice")]
+    public CanvasGroup detainButton;
+    public CanvasGroup releaseButton;
+    public CanvasGroup confirmChoiceButton;
+    [Header("Tool Result Folder")]
+    public Vector2 startResultAnchor = new Vector2(0.1f, 0.1f);
+    public Vector2 tabSize = new Vector2(0.12f, 0.1f);
+    public List<string> tabTitles = new ()
+    { 
+        "Incision",
+        "Grown body",
+        "UV colour",
+        "Spores",
+        "Blood"
+    };  
 
 
     public static HUD Instance;
@@ -74,6 +88,7 @@ public class HUD : MonoBehaviour
         {
             SetCanvasGroup(encyPages[i], i == m_currentPage, i == m_currentPage ? 1 : 0);
         }
+        CheckConfirmEligibility();
     }
 
     public void InteractWithToolDrawer()
@@ -168,5 +183,46 @@ public class HUD : MonoBehaviour
     public void ClickOnShroomInEncyclopedia(int ID)
     {
         DayManager.Instance.ChangeSelectedFungi(ID);
+        DayManager.Instance.chosenFungi = true;
+        CheckConfirmEligibility();
+    }
+
+    public void ChooseDetain()
+    {
+        DayManager.Instance.chosenFate = true;
+        CheckConfirmEligibility();
+        SetCanvasGroup(detainButton, false);
+        SetCanvasGroup(releaseButton, true);
+    }
+    public void ChooseRelease()
+    {
+        DayManager.Instance.chosenFate = true;
+        CheckConfirmEligibility();
+        SetCanvasGroup(detainButton, true);
+        SetCanvasGroup(releaseButton, false);
+    }
+
+    public void ResetFateChoice()
+    {
+        DayManager.Instance.chosenFate = false;
+        SetCanvasGroup(detainButton, true);
+        SetCanvasGroup(releaseButton, true);
+        CheckConfirmEligibility();
+    }
+
+    public void ConfirmChoice()
+    {
+        DayManager.Instance.EvaluateChoice();
+    }
+    public void CheckConfirmEligibility()
+    {
+        if(DayManager.Instance.chosenFate && DayManager.Instance.chosenFungi && DayManager.Instance.hasActiveCase)
+        {
+            SetCanvasGroup(confirmChoiceButton,true);
+        }
+        else
+        {
+            SetCanvasGroup(confirmChoiceButton, false);
+        }
     }
 }
