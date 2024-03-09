@@ -44,13 +44,4 @@ public class AilmentZone : MonoBehaviour
         }
     }
 
-    private void OnMouseEnter()
-    {
-        AddAilment();
-    }
-
-    private void OnMouseDown()
-    {
-        RemoveAilment();
-    }
 }

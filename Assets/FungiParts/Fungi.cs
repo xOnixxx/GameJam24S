@@ -9,15 +9,29 @@ public class Fungi : MonoBehaviour
     public List<GameObject> immatureParts = new List<GameObject>();
     public List<GameObject> ailments = new List<GameObject>();
     //public List<GameObject> bloodParticles = new List<GameObject>();
+    public List<Organ> acceptedOrgans = new List<Organ>();
 
-    public List<GameObject> strongAgainst;
-    public List<GameObject> weakAgainst;
+    public List<Tool> strongAgainst;
+    public List<Tool> weakAgainst;
     public float depthMycelium;
-    public bool spores;
+    public int minCount;
+    public int maxCount;
+
+    public int minClusterS;
+    public int maxClusterS;
+
+    public int minClusterCount;
+    public int maxClusterCount;
+
+    public int spreadSize;
+
+    public SpreadType spread;
+
     public bool uvSensitive;
+    public Color uvColoring;
     public float sporeProb;
 
-
+    private bool spores;
     private List<GameObject> spawnedParts = new List<GameObject>();
 
 
@@ -25,6 +39,7 @@ public class Fungi : MonoBehaviour
     public void Start()
     {
         spores = (Random.value < sporeProb);
+        Spread();
     }
 
     public void Spread()
@@ -32,9 +47,38 @@ public class Fungi : MonoBehaviour
         Quaternion qr = Random.rotation;
         qr.x = 0;
         qr.y = 0;
-        Vector3 fungiPoint = attachedOrgan.transform.Find("AilmentZonePrefab").GetComponent<AilmentZone>().PointInArea();
-        //TODO IF FOR Mature or Immature
-        //spawnedParts.Add(Instantiate(fungiParts[0], fungiPoint, qr));
+        List<Vector3> fungiPoint = GenerateSpread();
+        List<GameObject> activeSprites;
+
+        if (spores ) { activeSprites = matureParts; }
+        else{ activeSprites = immatureParts; }
+        foreach (Vector3 p in fungiPoint)
+        {
+            qr = Random.rotation;
+            qr.x = 0;
+            qr.y = 0;
+            spawnedParts.Add(Instantiate(activeSprites[0], p, qr));
+        }
+
+
+    }
+
+
+    private List<Vector3> GenerateSpread()
+    {
+        int count = Random.Range(minCount, maxCount);
+        int clusterSize = Random.Range(minClusterS, maxClusterS);
+        int clusterCount = Random.Range(minClusterCount, maxClusterCount);
+        
+
+
+        switch (spread)
+        {
+            case SpreadType.Normal: return attachedOrgan.transform.Find("FungiZonePrefab").GetComponent<fungiZone>().NormalDistribution(count);
+            case SpreadType.Islands: return attachedOrgan.transform.Find("FungiZonePrefab").GetComponent<fungiZone>().GenerateMultipleClusters(clusterCount, clusterSize, spreadSize);
+            case SpreadType.Center: return attachedOrgan.transform.Find("FungiZonePrefab").GetComponent<fungiZone>().GenerateCluster(clusterSize, spreadSize);
+            default: return new List<Vector3>();
+        }
     }
     
     public void Die()
@@ -61,5 +105,14 @@ public class Fungi : MonoBehaviour
         Spread();
     }
 
+}
+
+
+public enum SpreadType
+{
+    Normal,
+    Center,
+    Islands,
+    Outer
 }
 
