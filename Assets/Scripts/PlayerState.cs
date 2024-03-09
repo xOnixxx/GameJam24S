@@ -20,7 +20,6 @@ public class PlayerState : MonoBehaviour
     public static PlayerState Instance;
     public int startingMoney;
     public int currentMoney;
-    public int selectedTool;
     public List<CaseReport> dayStats = new();
     
     void Awake()
@@ -46,7 +45,12 @@ public class PlayerState : MonoBehaviour
     
     public void SpendOnTool(int amount)
     {
-        currentMoney -= amount;
+        UpdateCurrentMoney(-amount);
         DayManager.Instance.currentToolCost += amount;
+    }
+    
+    public void UpdateCurrentMoney(int change)
+    {
+        currentMoney += change;
     }
 }
