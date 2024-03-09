@@ -16,12 +16,18 @@ public class CaseCreator : MonoBehaviour
     {
         int organID = UnityEngine.Random.Range(0, organList.Count - 1);
         int fungiID = UnityEngine.Random.Range(0, fungiList.Count - 1);
-        var organ = Instantiate<GameObject>(organList[organID]);
         var fungi = Instantiate<GameObject>(fungiList[fungiID]);
+        var organ = Instantiate<GameObject>(organList[organID]);
+        PlaceOrgan(organ);
+        fungi.GetComponent<Fungi>().Infect(organ);
         (Fungi,Organ) temp1 = (fungi.GetComponent<Fungi>(), organ.GetComponent<Organ>());
-        temp1.Item1.attachedOrgan = organ;
 
         return temp1;
+    }
+
+    public void PlaceOrgan(GameObject organ)
+    {
+        organ.transform.position = Vector3.one;
     }
 
 
