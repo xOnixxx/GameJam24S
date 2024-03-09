@@ -45,7 +45,12 @@ public class PlayerState : MonoBehaviour
     
     public void SpendOnTool(int amount)
     {
-        currentMoney -= amount;
+        UpdateCurrentMoney(-amount);
         DayManager.Instance.currentToolCost += amount;
+    }
+    
+    public void UpdateCurrentMoney(int change)
+    {
+        currentMoney += change;
     }
 }

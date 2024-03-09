@@ -6,7 +6,7 @@ public class Tool : MonoBehaviour
 {
 
     public toolType toolName;
-    public int dependency;
+    public float dependency;
     public float price;
     public Sprite toolSprite;
 
