@@ -137,6 +137,7 @@ public class Fungi : MonoBehaviour
         {
             if (PlayerState.Instance.currentMoney > (activeTool.price + DayManager.Instance.priceIncrease))
             {
+                PlayerState.Instance.UpdateCurrentMoney(-(int)(activeTool.price + DayManager.Instance.priceIncrease));
                 if (Random.value < activeTool.dependency)
                 {
                     ToolSelection(activeTool);
@@ -167,18 +168,24 @@ public class Fungi : MonoBehaviour
             case toolType.scalpel:
                 if (spores) {
                     attachedOrgan.transform.Find("Spores 1").GetComponent<ParticleSystem>().Play();
+                    //SoundManager.Instance.PlaySound("SmokePuff");
                     HUD.Instance.ReportSuccess(false);
                 }
-                else { HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>()); }
+                else { HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>());
+                    SoundManager.Instance.PlaySound("SlashCut");
+                }
                 break;
             case toolType.syringeCheap:
                 HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>());
+                //SoundManager.Instance.PlaySound("SyringeTap");
                 break;
             case toolType.syringeExpansive:
                 HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>());
+                //SoundManager.Instance.PlaySound("SyringeTap");
                 break;
             case toolType.UVlight:
                 HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>());
+                //SoundManager.Instance.PlaySound("LazerBuzzShort");
                 DayManager.Instance.UVOn = true;
                 UVLightActive();
                 break;
@@ -187,6 +194,7 @@ public class Fungi : MonoBehaviour
                 break;
             case toolType.sporeDetector:
                 HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>());
+                //SoundManager.Instance.PlaySound("GlassTap");
                 break;
             default: return;
         }

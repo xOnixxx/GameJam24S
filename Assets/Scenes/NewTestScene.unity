@@ -5268,6 +5268,7 @@ MonoBehaviour:
   minimumMinAnchorTools: {x: 0.2, y: 0.1}
   maximumMinAnchorTools: {x: 0.8, y: 0.1}
   toolsOpened: 0
+  applyTool: {fileID: 0}
   encyTransform: {fileID: 1569614655}
   encyGroup: {fileID: 0}
   prevPageButton: {fileID: 320976509}
@@ -5292,6 +5293,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   resultShow: {fileID: 0}
+  resultGroup: {fileID: 0}
   minimumMinAnchorResults: {x: 0.05, y: -0.5}
   minimumMaxAnchorResults: {x: 0.6, y: 0.08}
   maximumMinAnchorResults: {x: 0.05, y: 0}
@@ -5342,6 +5344,7 @@ MonoBehaviour:
   uvStrength: 0.2
   uvSpeed: 0.25
   popUp: {fileID: 1258982025}
+  popUpImage: {fileID: 0}
   minmaxAnchorsPop:
   - {x: 1.1, y: 0.1}
   - {x: 1.8, y: 0.9}
