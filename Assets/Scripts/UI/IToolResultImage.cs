@@ -1,8 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public interface IToolResultImage
+public abstract class IToolResultImage : MonoBehaviour
 {
-    public void Visualize();
+    public abstract Sprite Visualize();
+    public abstract void DeVisualize();
+
 }
+
+

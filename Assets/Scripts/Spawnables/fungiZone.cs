@@ -13,12 +13,6 @@ public class fungiZone : MonoBehaviour
     Bounds boxBounds;
 
 
-    private void Start()
-    {
-
-    }
-
-
     public List<Vector3> NormalDistribution(int size)
     {
         box = GetComponent<BoxCollider2D>();
@@ -38,7 +32,6 @@ public class fungiZone : MonoBehaviour
                attempt++; 
             }
 
-            Debug.Log(x + " " + y);
             points.Add(new Vector3(x, y, 0));
             attempt = 0;
             x = 0;
@@ -55,8 +48,8 @@ public class fungiZone : MonoBehaviour
         Vector3 center = this.NormalDistribution(1)[0];
         List<Vector3> points = new List<Vector3>();
         int attempt = 0;
-        float x = 0;
-        float y = 0;
+        float x = -9999;
+        float y = -9999;
         //(x < (center.x - range) && x > (center.x + range) && y < (center.y - range) && y > (center.y + range)
         for (int i = 0; i < size; i++)
         {
@@ -68,7 +61,6 @@ public class fungiZone : MonoBehaviour
                 y = temp.y;
                 attempt++;
             }
-            Debug.Log(x + " " + y);
             attempt = 0;
             
             points.Add(new Vector3(x,y, 0));

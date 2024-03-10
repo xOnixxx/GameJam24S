@@ -9,20 +9,6 @@ public class Tool : MonoBehaviour
     public float dependency;
     public float price;
     public Sprite toolSprite;
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
 
 public enum toolType

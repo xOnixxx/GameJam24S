@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2153681023561158248}
   - component: {fileID: 4677478376590517939}
+  - component: {fileID: 5987745319120921965}
   m_Layer: 0
   m_Name: TestTool
   m_TagString: Untagged
@@ -84,3 +85,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5987745319120921965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2924907495035984026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf3837fbe54549e4d9e5ca5ad4427c30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toolName: 0
+  dependency: 0
+  price: 0
+  toolSprite: {fileID: 0}

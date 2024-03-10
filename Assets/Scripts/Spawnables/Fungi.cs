@@ -32,12 +32,18 @@ public class Fungi : MonoBehaviour
     public bool uvSensitive;
     public Color uvColoring;
     public Color originalColor;
+    public Sprite bloodEffect;
+    public Sprite myceliumRoots;
+    public Sprite sporeDish;
+    public Sprite uvSample;
+
     public float sporeProb;
     public float matureProb;
 
     public float weaknesMod;
 
-    private bool spores;
+    [HideInInspector]
+    public bool spores;
     private bool isMature;
     private List<GameObject> spawnedParts = new List<GameObject>();
 
@@ -156,27 +162,24 @@ public class Fungi : MonoBehaviour
         {
             case toolType.scalpel:
                 if (spores) { Debug.Log("BOOOM!"); }
-                Debug.Log(depthMycelium);
+                else { HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>()); }
                 break;
             case toolType.syringeCheap:
-                Debug.Log("Cheap blood!");
+                HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>());
                 break;
             case toolType.syringeExpansive:
-                Debug.Log("Expansice blood!");
+                HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>());
                 break;
             case toolType.UVlight:
-                Debug.Log("Change lights");
+                HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>());
                 DayManager.Instance.UVOn = true;
                 UVLightActive();
                 break;
             case toolType.fastGrowth:
-                Debug.Log("Show growth!");
-                Sprite toShow = matureParts[Random.Range(0, matureParts.Count -1)].GetComponent<SpriteRenderer>().sprite;
-                //TODO SHOW WINDOW WITH MEAT AND MATURED SHROOM/JUST MATURED SHROOM
+                HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>());
                 break;
             case toolType.sporeDetector:
-                //return spore
-                Debug.Log(spores);
+                HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>());
                 break;
             default: return;
         }
