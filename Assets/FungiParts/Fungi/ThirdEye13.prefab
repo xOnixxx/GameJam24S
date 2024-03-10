@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6800162186160419050}
   - component: {fileID: -6342364927467898188}
   m_Layer: 0
-  m_Name: Smith4
+  m_Name: ThirdEye13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,31 +44,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f87a81ed10f8646a5a75d1452fb101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 4
+  ID: 13
   attachedOrgan: {fileID: 0}
   matureParts:
-  - {fileID: 4136666948774889836, guid: 55b91d81f752d1c4c8647217138f7618, type: 3}
-  immatureParts: []
-  acceptedOrgans: 0000000004000000
+  - {fileID: 4136666948774889836, guid: 580236fd8cf34094b878561174da46cb, type: 3}
+  - {fileID: 4136666948774889836, guid: 6fb7c79817e693f4394830c3539fb035, type: 3}
+  immatureParts:
+  - {fileID: 4136666948774889836, guid: 580236fd8cf34094b878561174da46cb, type: 3}
+  - {fileID: 4136666948774889836, guid: 6fb7c79817e693f4394830c3539fb035, type: 3}
+  acceptedOrgans: 0100000003000000
   strongAgainst: 
   weakAgainst: 
   depthMycelium: 0
   minCount: 0
-  maxCount: 2
+  maxCount: 0
   minClusterS: 0
-  maxClusterS: 0
+  maxClusterS: 3
   minClusterCount: 0
   maxClusterCount: 0
   spreadSize: 0
-  spread: 0
+  spread: 1
   uvSensitive: 1
-  uvColoring: {r: 0, g: 0.15686275, b: 1, a: 1}
+  uvColoring: {r: 0.13333334, g: 1, b: 0, a: 1}
   originalColor: {r: 1, g: 1, b: 1, a: 1}
   bloodEffect: {fileID: 0}
   myceliumRoots: {fileID: 0}
-  sporeDish: {fileID: 21300000, guid: 3f598448d27e3304da7a3e1d0483a4c1, type: 3}
+  sporeDish: {fileID: 0}
   uvSample: {fileID: 0}
-  sporeProb: 0
+  sporeProb: 1
   matureProb: 1
   weaknesMod: 0
   spores: 0

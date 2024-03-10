@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6800162186160419050}
   - component: {fileID: -6342364927467898188}
   m_Layer: 0
-  m_Name: DoomMould6
+  m_Name: GomuGomuNoShroom1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,18 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f87a81ed10f8646a5a75d1452fb101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 6
+  ID: 1
   attachedOrgan: {fileID: 0}
   matureParts:
-  - {fileID: 4136666948774889836, guid: 7d2049f6e41cc814cabb7319e6395749, type: 3}
-  - {fileID: 4136666948774889836, guid: 9578651a98d418b428938348ed10a7ae, type: 3}
+  - {fileID: 4136666948774889836, guid: 580236fd8cf34094b878561174da46cb, type: 3}
+  - {fileID: 4136666948774889836, guid: 6fb7c79817e693f4394830c3539fb035, type: 3}
   immatureParts: []
-  acceptedOrgans: 00000000
+  acceptedOrgans: 0200000001000000
   strongAgainst: 
   weakAgainst: 
-  depthMycelium: 0
+  depthMycelium: 1
   minCount: 0
-  maxCount: 0
+  maxCount: 2
   minClusterS: 0
   maxClusterS: 0
   minClusterCount: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
   spreadSize: 0
   spread: 0
   uvSensitive: 1
-  uvColoring: {r: 0, g: 0.15686275, b: 1, a: 1}
+  uvColoring: {r: 1, g: 0.8352941, b: 0.043137256, a: 1}
   originalColor: {r: 1, g: 1, b: 1, a: 1}
   bloodEffect: {fileID: 0}
   myceliumRoots: {fileID: 0}
