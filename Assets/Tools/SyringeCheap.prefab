@@ -47,11 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3837fbe54549e4d9e5ca5ad4427c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolName: 1
+  toolName: 4
   dependency: 0.4
   price: 2
   toolSprite: {fileID: 0}
-  toolResultImage: {fileID: 0}
 --- !u!114 &6324354924693496511
 MonoBehaviour:
   m_ObjectHideFlags: 0

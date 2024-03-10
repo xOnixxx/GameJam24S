@@ -70,6 +70,10 @@ public class DayManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        StartNewDay();
+    }
 
     public void GetNewOrgan()
     {
@@ -142,7 +146,8 @@ public class DayManager : MonoBehaviour
 
     public void EvaluateChoice()
     {
-        if(!chosenFate || !chosenFungi || !hasActiveCase)
+        HUD.Instance.SetCanvasGroup(HUD.Instance.applyTool, false);
+        if (!chosenFate || !chosenFungi || !hasActiveCase)
         {
             return;
         }
