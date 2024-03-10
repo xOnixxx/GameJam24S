@@ -170,7 +170,7 @@ public class Fungi : MonoBehaviour
             case toolType.scalpel:
                 if (spores) {
                     attachedOrgan.transform.Find("Spores 1").GetComponent<ParticleSystem>().Play();
-                    SoundManager.Instance.PlaySound("SmokePuff");
+                    //SoundManager.Instance.PlaySound("SmokePuff");
                     HUD.Instance.ReportSuccess(false);
                 }
                 else { HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>());
@@ -179,15 +179,15 @@ public class Fungi : MonoBehaviour
                 break;
             case toolType.syringeCheap:
                 HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>());
-                SoundManager.Instance.PlaySound("SyringeTap");
+                //SoundManager.Instance.PlaySound("SyringeTap");
                 break;
             case toolType.syringeExpansive:
                 HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>());
-                SoundManager.Instance.PlaySound("SyringeTap");
+                //SoundManager.Instance.PlaySound("SyringeTap");
                 break;
             case toolType.UVlight:
                 HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>());
-                SoundManager.Instance.PlaySound("LazerBuzzShort");
+                //SoundManager.Instance.PlaySound("LazerBuzzShort");
                 DayManager.Instance.UVOn = true;
                 UVLightActive();
                 break;
@@ -196,7 +196,7 @@ public class Fungi : MonoBehaviour
                 break;
             case toolType.sporeDetector:
                 HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>());
-                SoundManager.Instance.PlaySound("GlassTap");
+                //SoundManager.Instance.PlaySound("GlassTap");
                 break;
             default: return;
         }
