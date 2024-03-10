@@ -12,10 +12,31 @@ public class SoundManager : MonoBehaviour
     public List<AudioSource> inactiveMusicSources = new();
     public List<AudioSource> activeAudioSources = new();
     public List<AudioSource> activeMusicSources = new();
+
+    public List<string> audioName = new();
+    public List<AudioClip> audioClip = new();
+
+    public List<string> soundName = new();
+    public List<AudioClip> soundClip = new();
+
     public Dictionary<string, AudioClip> audioClips = new();
     public Dictionary<string, AudioClip> musicClips = new();
+
     void Awake()
     {
+
+
+        for (int i = 0; i < audioName.Count; i++)
+        {
+            audioClips.Add(audioName[i], audioClip[i]);
+        }
+
+        for (int i = 0; i < soundName.Count; i++)
+        {
+            musicClips.Add(soundName[i], soundClip[i]);
+        }
+
+
         if(Instance != null)
         {
             Destroy(gameObject);
@@ -104,4 +125,6 @@ public class SoundManager : MonoBehaviour
             activeMusicSources.Add(newPlayer);
         }
     }
+
+
 }

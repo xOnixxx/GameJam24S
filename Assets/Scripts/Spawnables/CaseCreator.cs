@@ -39,13 +39,14 @@ public class CaseCreator : MonoBehaviour
     public void PlaceOrgan(GameObject organ, GameObject fungi)
     {
         Debug.Log("Placing");
+        SoundManager.Instance.PlaySound("OrganDrop");
         organ.transform.position = new Vector3(-10, -2.7f, 1);
         fungi.transform.position = new Vector3(-10, -2.7f, -2);
         Transform tO = organ.transform;
         Transform tF = fungi.transform;
 
-        tO.DOMove(new Vector3(0, -1f, 1), 1).SetEase(Ease.InCubic);
-        tF.DOMove(new Vector3(0, -1f, -2), 1).SetEase(Ease.InCubic);
+        tO.DOMove(new Vector3(0, -1f, 1), 0.6f).SetEase(Ease.InCubic);
+        tF.DOMove(new Vector3(0, -1f, -2), 0.6f).SetEase(Ease.InCubic);
 
         tO.DOScale(new Vector3(1.5f, 1.5f, 1), 1);
         tF.DOScale(new Vector3(1.5f, 1.5f, 1), 1);
