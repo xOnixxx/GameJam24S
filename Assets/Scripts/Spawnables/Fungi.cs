@@ -143,12 +143,13 @@ public class Fungi : MonoBehaviour
                 {
                     ToolSelection(activeTool);
                 }
-                else { Debug.Log("Skill issue!"); }
+                else
+                {
+                    HUD.Instance.ReportSuccess(false);
+                }
             }
             else {
-                Debug.Log(activeTool.price + " " + DayManager.Instance.priceIncrease);
-                Debug.Log(PlayerState.Instance.currentMoney);
-                Debug.Log("Sorry u broke!"); }
+            HUD.Instance.ReportSuccess(false);}
         }
 
 
@@ -159,7 +160,7 @@ public class Fungi : MonoBehaviour
         if (strongAgainst.Contains(activeTool.toolName))
         {
             if (Random.value < weaknesMod) {
-                Debug.Log("Shroom too stronk");
+                HUD.Instance.ReportSuccess(false);
                 return; }
         }
         Debug.Log(spores);
@@ -167,7 +168,9 @@ public class Fungi : MonoBehaviour
         {
             case toolType.scalpel:
                 if (spores) {
-                    attachedOrgan.transform.Find("Spores 1").GetComponent<ParticleSystem>().Play(); }
+                    attachedOrgan.transform.Find("Spores 1").GetComponent<ParticleSystem>().Play();
+                    HUD.Instance.ReportSuccess(false);
+                }
                 else { HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>()); }
                 break;
             case toolType.syringeCheap:

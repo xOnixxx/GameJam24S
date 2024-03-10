@@ -49,7 +49,6 @@ MonoBehaviour:
   matureParts:
   - {fileID: 4136666948774889836, guid: 55b91d81f752d1c4c8647217138f7618, type: 3}
   immatureParts: []
-  ailments: []
   acceptedOrgans: 0000000004000000
   strongAgainst: 
   weakAgainst: 
@@ -65,6 +64,12 @@ MonoBehaviour:
   uvSensitive: 1
   uvColoring: {r: 0, g: 0.15686275, b: 1, a: 1}
   originalColor: {r: 1, g: 1, b: 1, a: 1}
+  bloodEffect: {fileID: 0}
+  myceliumRoots: {fileID: 0}
+  sporeDish: {fileID: 21300000, guid: 3f598448d27e3304da7a3e1d0483a4c1, type: 3}
+  uvSample: {fileID: 0}
   sporeProb: 0
   matureProb: 1
   weaknesMod: 0
+  spores: 0
+  isZoomed: 0
