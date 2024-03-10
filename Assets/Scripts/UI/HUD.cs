@@ -44,7 +44,7 @@ public class HUD : MonoBehaviour
     public RectTransform resultsFolder;
     public List<CanvasGroup> tabHeaders = new();
     public List<CanvasGroup> tabs = new();  // TODO ADD CALLING FOR TAB TO VISUALIZE
-    private bool resultsOpened = false;
+    public bool resultsOpened = false;
     public float resultsSpeed = 0.5f;
     [Header("Guberment Panel")]
     public RectTransform gubermentPanel;
@@ -53,7 +53,7 @@ public class HUD : MonoBehaviour
     public Vector2 maximumMinAnchorGov = new(0f, 0.65f);
     public Vector2 maximumMaxAnchorGov = new(0.44f, 0.95f);
     public float gubermentSpeed = 0.5f;
-    private bool gubermentOpened = false;
+    public bool gubermentOpened = false;
     [Header("Timer")]
     public CanvasGroup timerContainer;
     public Text timerText;
@@ -553,5 +553,9 @@ public class HUD : MonoBehaviour
     {
         successMessage.DOFade(0, fadeSpeed);
         failureMessage.DOFade(0, fadeSpeed);
+    }
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
