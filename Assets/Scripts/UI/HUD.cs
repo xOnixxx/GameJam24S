@@ -33,6 +33,7 @@ public class HUD : MonoBehaviour
     public CanvasGroup releaseButton;
     public CanvasGroup confirmChoiceButton;
     [Header("Tool Result Folder")]
+    public List<IToolResultImage> actualResults;
     public Vector2 minimumMinAnchorResults = new(0.05f,-0.5f);
     public Vector2 minimumMaxAnchorResults = new(0.6f,0.08f);
     public Vector2 maximumMinAnchorResults = new(0.05f,0f);
@@ -87,7 +88,9 @@ public class HUD : MonoBehaviour
     public float uvSpeed = 0.25f;
 
     [Header("ToolResultPopUp")]
-    public CanvasGroup popUp;
+    public RectTransform popUp;
+    public List<Vector2> minmaxAnchorsPop = new() { new(1.1f,0.1f), new(1.8f,0.9f), new(0.15f,0.1f), new(0.85f,0.9f), new(0.05f,-0.6f), new(0.59f,-0.02f)};
+    public float popSpeed = 0.5f;
     public IToolResultImage popUpImage;
     public Text popUpText;
 
@@ -114,13 +117,13 @@ public class HUD : MonoBehaviour
         }
         if(encyOpened)
         {
-            SetCanvasGroup(encyGroup, true);
+            //SetCanvasGroup(encyGroup, true);
             encyTransform.anchorMin = maximumMinAnchorEncy;
             encyTransform.anchorMax = maximumMaxAnchorEncy;
         }
         else
         {
-            SetCanvasGroup(encyGroup, false);
+            //SetCanvasGroup(encyGroup, false);
             encyTransform.anchorMin = minimumMinAnchorEncy;
             encyTransform.anchorMax = minimumMaxAnchorEncy;
         }
@@ -145,6 +148,7 @@ public class HUD : MonoBehaviour
         CheckConfirmEligibility();
         UpdateDay();
         UpdateQuota();
+        UpdatePrices();
     }
     public void InteractWithToolDrawer()
     {
@@ -183,14 +187,14 @@ public class HUD : MonoBehaviour
 
     public void OpenEncyclopedia()
     {
-        SetCanvasGroup(encyGroup,true);
+        //SetCanvasGroup(encyGroup,true);
         encyOpened = true;
         encyTransform.DOAnchorMin(maximumMinAnchorEncy, encySpeed);
         encyTransform.DOAnchorMax(maximumMaxAnchorEncy, encySpeed);
     }
     public void CloseEncyclopedia()
     {
-        SetCanvasGroup(encyGroup,false);
+        //SetCanvasGroup(encyGroup,false);
         encyOpened = false;
         encyTransform.DOAnchorMin(minimumMinAnchorEncy, encySpeed);
         encyTransform.DOAnchorMax(minimumMaxAnchorEncy, encySpeed);
@@ -315,6 +319,18 @@ public class HUD : MonoBehaviour
     }
     public void RevealTab(int id)
     {
+        bool wasFirst = true;
+        foreach (var item in tabHeaders)
+        {
+            if(item.alpha > 0.5f)
+            {
+                wasFirst = false;
+            }
+        }
+        if(wasFirst)
+        {
+            actualResults[id].Visualize();
+        }
         SetCanvasGroup(tabHeaders[id], m_currentTab != id, 1);
     }
 
@@ -483,12 +499,21 @@ public class HUD : MonoBehaviour
         uvLight.DOFade(0, uvSpeed);
     }
 
-    public void ShowToolResults()
+    public void ShowToolResults(int toolID, IToolResultImage popIm)
     {
-
+        popUpImage = popIm;
+        actualResults[toolID] = popUpImage;
+        popUp.DOAnchorMin(minmaxAnchorsPop[2],popSpeed);
+        popUp.DOAnchorMax(minmaxAnchorsPop[3], popSpeed);
     }
     public void SaveToolResults()
     {
-
+        popUp.DOAnchorMin(minmaxAnchorsPop[4], popSpeed);
+        popUp.DOAnchorMax(minmaxAnchorsPop[5], popSpeed).onComplete = ResetPopUp;
+    }
+    public void ResetPopUp()
+    {
+        popUp.anchorMin = minmaxAnchorsPop[0];
+        popUp.anchorMax = minmaxAnchorsPop[1];
     }
 }
