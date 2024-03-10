@@ -35,13 +35,13 @@ public class LevelElements : MonoBehaviour
         DayManager.Instance.GetNewOrgan();
         HUD.Instance.CheckConfirmEligibility();
         //Move whole line
-        foreach (var freezer in freezerLine)
+        /*foreach (var freezer in freezerLine)
         {
             freezer.DOAnchorMin(freezer.anchorMin + sizeOfFreezerMovement, speedOfFreezerMovement);
             freezer.DOAnchorMax(freezer.anchorMax + sizeOfFreezerMovement, speedOfFreezerMovement);
         }
         //Afterwards move the last freezer to the top
-        StartCoroutine(ReturnFreezerToTop());
+        StartCoroutine(ReturnFreezerToTop());*/
     }
 
     private IEnumerator ReturnFreezerToTop()
