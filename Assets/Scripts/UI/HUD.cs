@@ -9,6 +9,7 @@ public class HUD : MonoBehaviour
     [Header("Tool Container")]
     public GameObject toolContainer;
     public List<Text> toolPrices;
+    public List<CanvasGroup> toolButtons = new();
     public float timeToOpenTools = 0.5f;
     public Vector2 minimumMinAnchorTools = new(0.2f,0.1f);
     public Vector2 maximumMinAnchorTools = new(0.8f,0.1f);
@@ -189,6 +190,10 @@ public class HUD : MonoBehaviour
     public void ClickOnTool(int toolNumber)
     {
         DayManager.Instance.ChangeSelectedTool(toolNumber);
+        for (int i = 0; i < toolButtons.Count; i++)
+        {
+            SetCanvasGroup(toolButtons[i], i != toolNumber);
+        }
     }
 
     public void OpenEncyclopedia()
@@ -391,7 +396,7 @@ public class HUD : MonoBehaviour
         if (timerOn)
         {
             TimeSpan time = TimeSpan.FromSeconds(Mathf.Max(0,DayManager.Instance.timerStart  - Time.time + DayManager.Instance.timerLength));
-            timerText.text = time.ToString("hh':'mm':'ss");
+            timerText.text = time.ToString("mm':'ss");
         }
     }
 
@@ -527,21 +532,26 @@ public class HUD : MonoBehaviour
     {
         if(success)
         {
-            
+            successMessage.DOFade(1, fadeSpeed).onComplete = DoReportDelay;
         }
         else
         {
-
+            failureMessage.DOFade(1, fadeSpeed).onComplete = DoReportDelay;
         }
     }
     public void DoReportDelay()
     {
-
+        StartCoroutine(ReportDelay());
     }
 
     private IEnumerator ReportDelay()
     {
         yield return new WaitForSeconds(delayReport);
-        
+        HideReport();
+    }
+    public void HideReport()
+    {
+        successMessage.DOFade(0, fadeSpeed);
+        failureMessage.DOFade(0, fadeSpeed);
     }
 }
