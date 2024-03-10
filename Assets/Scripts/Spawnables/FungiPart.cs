@@ -10,7 +10,7 @@ public class FungiPart : MonoBehaviour
         {
             GetComponentInParent<Fungi>().UseTool();
         }
-        else if (!HUD.Instance.encyOpened)
+        else if (!HUD.Instance.encyOpened && !HUD.Instance.gubermentOpened && !HUD.Instance.resultsOpened)
         {
             if (GetComponentInParent<Fungi>().isZoomed)
             {

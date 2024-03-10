@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8140472770342044047}
   - component: {fileID: 1238567657325857814}
+  - component: {fileID: 3471979870618778772}
   m_Layer: 0
   m_Name: UV Lamp
   m_TagString: Untagged
@@ -48,3 +49,15 @@ MonoBehaviour:
   dependency: 2
   price: 10
   toolSprite: {fileID: 0}
+--- !u!114 &3471979870618778772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7306808712587044510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afaa86c2309c1fe4da53422cd4ff06dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

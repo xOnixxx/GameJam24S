@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3281497662572784910}
   - component: {fileID: 4542146069120645638}
   - component: {fileID: 2970764910166922196}
+  - component: {fileID: 290821530828059332}
   m_Layer: 0
   m_Name: Syringe
   m_TagString: Untagged
@@ -50,7 +51,6 @@ MonoBehaviour:
   dependency: 1
   price: 20
   toolSprite: {fileID: 0}
-  toolResultImage: {fileID: 0}
 --- !u!212 &2970764910166922196
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -103,6 +103,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &290821530828059332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8197781048036381596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 006a025f299230a41bb09eca8c292553, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &194055857441405384
 PrefabInstance:
   m_ObjectHideFlags: 0

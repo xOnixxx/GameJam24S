@@ -67,10 +67,12 @@ MonoBehaviour:
   uvSensitive: 1
   uvColoring: {r: 0.64139885, g: 0.078987174, b: 0.6698113, a: 1}
   originalColor: {r: 0.6603774, g: 0.19825718, b: 0.109024554, a: 1}
-  bloodEffect: {r: 0.3207547, g: 0.13163048, b: 0.13163048, a: 0}
+  bloodEffect: {fileID: 0}
   myceliumRoots: {fileID: 21300000, guid: 502a3c1c14e01144d832e8cccaaefc25, type: 3}
   sporeDish: {fileID: 21300000, guid: 1239cdfc4b330744ea7333677b913696, type: 3}
-  sporeProb: 0
-  matureProb: 0
+  uvSample: {fileID: 0}
+  sporeProb: 1
+  matureProb: 1
   weaknesMod: 0
   spores: 0
+  isZoomed: 0

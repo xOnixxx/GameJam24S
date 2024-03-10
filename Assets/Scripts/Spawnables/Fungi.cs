@@ -162,10 +162,12 @@ public class Fungi : MonoBehaviour
                 Debug.Log("Shroom too stronk");
                 return; }
         }
+        Debug.Log(spores);
         switch (activeTool.toolName)
         {
             case toolType.scalpel:
-                if (spores) { Debug.Log("BOOOM!"); }
+                if (spores) {
+                    attachedOrgan.transform.Find("Spores 1").GetComponent<ParticleSystem>().Play(); }
                 else { HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>()); }
                 break;
             case toolType.syringeCheap:

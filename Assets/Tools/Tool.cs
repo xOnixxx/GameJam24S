@@ -14,9 +14,9 @@ public class Tool : MonoBehaviour
 public enum toolType
 {
     scalpel,
+    fastGrowth,
+    UVlight,
+    sporeDetector,
     syringeCheap,
     syringeExpansive,
-    UVlight,
-    fastGrowth,
-    sporeDetector
 }
