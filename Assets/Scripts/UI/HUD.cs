@@ -522,4 +522,26 @@ public class HUD : MonoBehaviour
         popUp.anchorMin = minmaxAnchorsPop[0];
         popUp.anchorMax = minmaxAnchorsPop[1];
     }
+
+    public void ReportSuccess(bool success)
+    {
+        if(success)
+        {
+            
+        }
+        else
+        {
+
+        }
+    }
+    public void DoReportDelay()
+    {
+
+    }
+
+    private IEnumerator ReportDelay()
+    {
+        yield return new WaitForSeconds(delayReport);
+        
+    }
 }
