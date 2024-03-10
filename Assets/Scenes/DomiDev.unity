@@ -5222,6 +5222,8 @@ MonoBehaviour:
   detainButton: {fileID: 1578812393}
   releaseButton: {fileID: 276288858}
   confirmChoiceButton: {fileID: 937289147}
+  actualResults: []
+  resultShow: {fileID: 0}
   minimumMinAnchorResults: {x: 0.05, y: -0.5}
   minimumMaxAnchorResults: {x: 0.6, y: 0.08}
   maximumMinAnchorResults: {x: 0.05, y: 0}
@@ -9028,7 +9030,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 972093031}
         m_TargetAssemblyTypeName: LevelElements, Assembly-CSharp
         m_MethodName: MoveFreezerLine
         m_Mode: 1

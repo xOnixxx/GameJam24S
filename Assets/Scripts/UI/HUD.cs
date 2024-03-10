@@ -33,7 +33,8 @@ public class HUD : MonoBehaviour
     public CanvasGroup releaseButton;
     public CanvasGroup confirmChoiceButton;
     [Header("Tool Result Folder")]
-    public List<IToolResultImage> actualResults;
+    public List<Sprite> actualResults = new(5);
+    public Image resultShow;
     public Vector2 minimumMinAnchorResults = new(0.05f,-0.5f);
     public Vector2 minimumMaxAnchorResults = new(0.6f,0.08f);
     public Vector2 maximumMinAnchorResults = new(0.05f,0f);
@@ -91,8 +92,13 @@ public class HUD : MonoBehaviour
     public RectTransform popUp;
     public List<Vector2> minmaxAnchorsPop = new() { new(1.1f,0.1f), new(1.8f,0.9f), new(0.15f,0.1f), new(0.85f,0.9f), new(0.05f,-0.6f), new(0.59f,-0.02f)};
     public float popSpeed = 0.5f;
-    public IToolResultImage popUpImage;
     public Text popUpText;
+
+    [Header("EvaluationReport")]
+    public CanvasGroup successMessage;
+    public CanvasGroup failureMessage;
+    public float fadeSpeed = 0.5f;
+    public float delayReport = 1f;
 
     public static HUD Instance;
     void Awake()
@@ -316,6 +322,7 @@ public class HUD : MonoBehaviour
         SetCanvasGroup(tabs[id], false, 1);
         SetCanvasGroup(tabs[m_currentTab], false, 0);
         m_currentTab = id;
+        resultShow.sprite = actualResults[id];
     }
     public void RevealTab(int id)
     {
@@ -329,7 +336,7 @@ public class HUD : MonoBehaviour
         }
         if(wasFirst)
         {
-            actualResults[id].Visualize();
+            resultShow.sprite = actualResults[id];
         }
         SetCanvasGroup(tabHeaders[id], m_currentTab != id, 1);
     }
@@ -501,8 +508,7 @@ public class HUD : MonoBehaviour
 
     public void ShowToolResults(toolType type, IToolResultImage popIm)
     {
-        popUpImage = popIm;
-        actualResults[((int)type)] = popUpImage;
+        actualResults[(int)type] = popIm.Visualize();
         popUp.DOAnchorMin(minmaxAnchorsPop[2],popSpeed);
         popUp.DOAnchorMax(minmaxAnchorsPop[3], popSpeed);
     }
