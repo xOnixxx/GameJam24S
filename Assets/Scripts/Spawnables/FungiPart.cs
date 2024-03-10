@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class FungiPart : MonoBehaviour
 {
+    /*
     private void OnMouseDown()
     {
+
+
         if (HUD.Instance.toolsOpened)
         {
             GetComponentInParent<Fungi>().UseTool();
@@ -20,4 +24,5 @@ public class FungiPart : MonoBehaviour
         }
 
     }
+    */
 }

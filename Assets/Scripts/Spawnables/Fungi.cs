@@ -242,6 +242,24 @@ public class Fungi : MonoBehaviour
         attachedOrgan.transform.localScale = Vector3.one*scale;
     }
 
+
+    public void ApplyTool()
+    {
+        if (HUD.Instance.toolsOpened)
+        {
+            UseTool();
+        }
+        else if (!HUD.Instance.encyOpened && !HUD.Instance.gubermentOpened && !HUD.Instance.resultsOpened)
+        {
+            if (isZoomed)
+            {
+                ZoomOut();
+            }
+            else { ZoomIn(); }
+        }
+    }
+
+
 }
 
 
