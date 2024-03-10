@@ -1,8 +1,10 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Search;
 using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Fungi : MonoBehaviour
 {
@@ -44,6 +46,8 @@ public class Fungi : MonoBehaviour
 
     [HideInInspector]
     public bool spores;
+    [HideInInspector]
+    public bool isZoomed = false;
     private bool isMature;
     private List<GameObject> spawnedParts = new List<GameObject>();
 
@@ -209,6 +213,24 @@ public class Fungi : MonoBehaviour
         {
             fungiParts.GetComponent<SpriteRenderer>().color = originalColor;
         }
+    }
+
+
+    public void ZoomIn()
+    {
+        isZoomed = true;
+        Camera t = Camera.main;
+        t.DOOrthoSize(3, 1);
+        attachedOrgan.transform.Find("Container").GetComponent<SpriteRenderer>().DOFade(0,0.5f);
+    }
+
+    public void ZoomOut()
+    {
+        isZoomed = false;
+        attachedOrgan.transform.Find("Container").GetComponent<SpriteRenderer>().DOFade(1, 0.5f);
+        Camera t = Camera.main;
+        t.DOOrthoSize(5,1);
+
     }
 
 

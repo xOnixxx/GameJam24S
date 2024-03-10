@@ -6,6 +6,18 @@ public class FungiPart : MonoBehaviour
 {
     private void OnMouseDown()
     {
-        GetComponentInParent<Fungi>().UseTool();
+        if (HUD.Instance.toolsOpened)
+        {
+            GetComponentInParent<Fungi>().UseTool();
+        }
+        else if (!HUD.Instance.encyOpened)
+        {
+            if (GetComponentInParent<Fungi>().isZoomed)
+            {
+                GetComponentInParent<Fungi>().ZoomOut();
+            }
+            else { GetComponentInParent<Fungi>().ZoomIn(); }
+        }
+
     }
 }
