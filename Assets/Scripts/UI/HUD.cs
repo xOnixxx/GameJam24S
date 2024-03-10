@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +16,7 @@ public class HUD : MonoBehaviour
     public bool toolsOpened;
     private RectTransform m_toolOptions;
     private CanvasGroup m_toolGroup;
+    public CanvasGroup applyTool;
     [Header("Encyclopedia")]
     public RectTransform encyTransform;
     public CanvasGroup encyGroup;
@@ -34,13 +35,14 @@ public class HUD : MonoBehaviour
     public CanvasGroup releaseButton;
     public CanvasGroup confirmChoiceButton;
     [Header("Tool Result Folder")]
-    public List<Sprite> actualResults = new(5);
+    public List<Sprite> actualResults = new(6);
     public Image resultShow;
+    public CanvasGroup resultGroup;
     public Vector2 minimumMinAnchorResults = new(0.05f,-0.5f);
     public Vector2 minimumMaxAnchorResults = new(0.6f,0.08f);
     public Vector2 maximumMinAnchorResults = new(0.05f,0f);
     public Vector2 maximumMaxAnchorResults = new(0.6f,0.58f);
-    private int m_currentTab = 0;
+    private int m_currentTab = -1;
     public RectTransform resultsFolder;
     public List<CanvasGroup> tabHeaders = new();
     public List<CanvasGroup> tabs = new();  // TODO ADD CALLING FOR TAB TO VISUALIZE
@@ -48,9 +50,9 @@ public class HUD : MonoBehaviour
     public float resultsSpeed = 0.5f;
     [Header("Guberment Panel")]
     public RectTransform gubermentPanel;
-    public Vector2 minimumMinAnchorGov = new(-0.4f, 0.65f);
+    public Vector2 minimumMinAnchorGov = new(-0.4f, 0.55f);
     public Vector2 minimumMaxAnchorGov = new(0.04f, 0.95f);
-    public Vector2 maximumMinAnchorGov = new(0f, 0.65f);
+    public Vector2 maximumMinAnchorGov = new(0f, 0.55f);
     public Vector2 maximumMaxAnchorGov = new(0.44f, 0.95f);
     public float gubermentSpeed = 0.5f;
     public bool gubermentOpened = false;
@@ -91,6 +93,7 @@ public class HUD : MonoBehaviour
 
     [Header("ToolResultPopUp")]
     public RectTransform popUp;
+    public Image popUpImage;
     public List<Vector2> minmaxAnchorsPop = new() { new(1.1f,0.1f), new(1.8f,0.9f), new(0.15f,0.1f), new(0.85f,0.9f), new(0.05f,-0.6f), new(0.59f,-0.02f)};
     public float popSpeed = 0.5f;
     public Text popUpText;
@@ -189,6 +192,7 @@ public class HUD : MonoBehaviour
 
     public void ClickOnTool(int toolNumber)
     {
+        SetCanvasGroup(applyTool, true);
         DayManager.Instance.ChangeSelectedTool(toolNumber);
         for (int i = 0; i < toolButtons.Count; i++)
         {
@@ -322,15 +326,17 @@ public class HUD : MonoBehaviour
     }
     public void ClickOnTab(int id)
     {
-        SetCanvasGroup(tabHeaders[id], false);
+        int realId = id == 5 ? 4 : id;
+        SetCanvasGroup(tabHeaders[realId], false);
         SetCanvasGroup(tabHeaders[m_currentTab], true);
-        SetCanvasGroup(tabs[id], false, 1);
+        SetCanvasGroup(tabs[realId], false, 1);
         SetCanvasGroup(tabs[m_currentTab], false, 0);
-        m_currentTab = id;
+        m_currentTab = realId;
         resultShow.sprite = actualResults[id];
     }
     public void RevealTab(int id)
     {
+        m_currentTab = id == 5 ? 4 : id;
         bool wasFirst = true;
         foreach (var item in tabHeaders)
         {
@@ -342,8 +348,9 @@ public class HUD : MonoBehaviour
         if(wasFirst)
         {
             resultShow.sprite = actualResults[id];
+            SetCanvasGroup(resultGroup, true, 1);
         }
-        SetCanvasGroup(tabHeaders[id], m_currentTab != id, 1);
+        SetCanvasGroup(tabHeaders[id == 5 ? 4 : id], m_currentTab != (id == 5 ? 4 : id), 1);
     }
 
     public void ClickOnGuberment()
@@ -374,7 +381,7 @@ public class HUD : MonoBehaviour
 
     public void UpdateFundsCount()
     {
-        DOVirtual.Int(m_currentFunds, PlayerState.Instance.currentMoney, fundsSpeed, (v) => fundsCount.text = v.ToString() + "�");
+        DOVirtual.Int(m_currentFunds, PlayerState.Instance.currentMoney, fundsSpeed, (v) => fundsCount.text = v.ToString() + "€");
         m_currentFunds = PlayerState.Instance.currentMoney;
         //DOTween.To(() => m_currentFunds, x => m_currentFunds = x ,PlayerState.Instance.currentMoney, fundsSpeed);
     }
@@ -402,7 +409,7 @@ public class HUD : MonoBehaviour
 
     public void UpdateQuota() 
     {
-        quotaCounter.text = Mathf.Min(DayManager.Instance.quotaProgress,DayManager.Instance.currentQuota).ToString() + "/" + DayManager.Instance.currentQuota;
+        quotaCounter.text = "Current Quota " + Mathf.Min(DayManager.Instance.quotaProgress,DayManager.Instance.currentQuota).ToString() + " / " + DayManager.Instance.currentQuota;
     }
 
     public void UpdateDay()
@@ -447,11 +454,11 @@ public class HUD : MonoBehaviour
         caseSummary.text = "Case #" + (currentCase + 1).ToString();
         currentCase++;
         int totalChange = curCase.Income - curCase.Penalty - curCase.ToolLoss;
-        //DOVirtual.Int(m_currentFunds, PlayerState.Instance.currentMoney, fundsSpeed, (v) => fundsCount.text = v.ToString() + "MshC");
-        DOVirtual.Int(curCase.Income, 0, speedOfSummary, (v) => caseRevenue.text = "Revenue : " + v.ToString()+ " MshC");
-        DOVirtual.Int(curCase.Penalty, 0, speedOfSummary, (v) => casePenalty.text = "Penalty : " + v.ToString()+ " MshC");
-        DOVirtual.Int(curCase.ToolLoss, 0, speedOfSummary, (v) => caseToolCost.text = "Cost of Tools : " + v.ToString() +" MshC");
-        DOVirtual.Int(m_interimFunds, m_interimFunds + totalChange, speedOfSummary, (v) => fundSummary.text = v.ToString() + " MshC").onComplete = DoDelay;
+        //DOVirtual.Int(m_currentFunds, PlayerState.Instance.currentMoney, fundsSpeed, (v) => fundsCount.text = v.ToString() + "¢");
+        DOVirtual.Int(curCase.Income, 0, speedOfSummary, (v) => caseRevenue.text = "Revenue : " + v.ToString()+ " ¢");
+        DOVirtual.Int(curCase.Penalty, 0, speedOfSummary, (v) => casePenalty.text = "Penalty : " + v.ToString()+ " ¢");
+        DOVirtual.Int(curCase.ToolLoss, 0, speedOfSummary, (v) => caseToolCost.text = "Cost of Tools : " + v.ToString() +" ¢");
+        DOVirtual.Int(m_interimFunds, m_interimFunds + totalChange, speedOfSummary, (v) => fundSummary.text = v.ToString() + " ¢").onComplete = DoDelay;
         m_interimFunds += totalChange;
     }
     public void FinishResults()
@@ -466,7 +473,7 @@ public class HUD : MonoBehaviour
         if (!m_haveCompletedSummary)
         {
             m_haveCompletedSummary = true;
-            DOVirtual.Int(m_interimFunds, m_currentFunds, speedOfSummary, (v) => fundSummary.text = v.ToString() + " MshC");
+            DOVirtual.Int(m_interimFunds, m_currentFunds, speedOfSummary, (v) => fundSummary.text = v.ToString() + " ¢");
             caseSummary.text = "Case #" + (PlayerState.Instance.dayStats.Count).ToString();
             currentCase = PlayerState.Instance.dayStats.Count;
 
@@ -498,7 +505,7 @@ public class HUD : MonoBehaviour
     {
         for (int i = 0; i < toolPrices.Count; i++)
         {
-            toolPrices[i].text = (DayManager.Instance.toolSelection[i].price + DayManager.Instance.priceIncrease).ToString() + " MshC";
+            toolPrices[i].text = (DayManager.Instance.toolSelection[i].price + DayManager.Instance.priceIncrease).ToString() + " ¢";
         }
     }
 
@@ -514,8 +521,10 @@ public class HUD : MonoBehaviour
     public void ShowToolResults(toolType type, IToolResultImage popIm)
     {
         actualResults[(int)type] = popIm.Visualize();
+        popUpImage.sprite = actualResults[(int)type];
         popUp.DOAnchorMin(minmaxAnchorsPop[2],popSpeed);
         popUp.DOAnchorMax(minmaxAnchorsPop[3], popSpeed);
+        RevealTab((int)type);
     }
     public void SaveToolResults()
     {
@@ -530,7 +539,7 @@ public class HUD : MonoBehaviour
 
     public void ReportSuccess(bool success)
     {
-        if(success)
+        if (success)
         {
             successMessage.DOFade(1, fadeSpeed).onComplete = DoReportDelay;
         }
@@ -557,5 +566,9 @@ public class HUD : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+    public void ApplyTool()
+    {
+        DayManager.Instance.currentCase.Item1.ApplyTool();
     }
 }
