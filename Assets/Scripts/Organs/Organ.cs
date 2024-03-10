@@ -25,10 +25,10 @@ public class Organ : MonoBehaviour
     public List<PolygonCollider2D> ailmentZone;
     public float severity;
     public organType organType;
-
-    private void OnMouseEnter()
+    
+    public void ZoomIn()
     {
-        Debug.Log("Entered!");
+        transform.Find("Container").GetComponent<SpriteRenderer>().enabled = false;
     }
 
 }

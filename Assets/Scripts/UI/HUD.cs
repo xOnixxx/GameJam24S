@@ -40,7 +40,7 @@ public class HUD : MonoBehaviour
     private int m_currentTab = 0;
     public RectTransform resultsFolder;
     public List<CanvasGroup> tabHeaders = new();
-    public List<CanvasGroup> tabs = new();
+    public List<CanvasGroup> tabs = new();  // TODO ADD CALLING FOR TAB TO VISUALIZE
     private bool resultsOpened = false;
     public float resultsSpeed = 0.5f;
     [Header("Guberment Panel")]
@@ -80,6 +80,16 @@ public class HUD : MonoBehaviour
     public float speedOfSummary = 0.5f;
     public int currentCase = 0;
     public float delayBetweenSummary = 0.5f;
+
+    [Header("Other")]
+    public CanvasGroup uvLight;
+    public float uvStrength = 0.25f;
+    public float uvSpeed = 0.25f;
+
+    [Header("ToolResultPopUp")]
+    public CanvasGroup popUp;
+    public IToolResultImage popUpImage;
+    public Text popUpText;
 
     public static HUD Instance;
     void Awake()
@@ -430,6 +440,8 @@ public class HUD : MonoBehaviour
             m_haveCompletedSummary = true;
             DOVirtual.Int(m_interimFunds, m_currentFunds, speedOfSummary, (v) => fundSummary.text = v.ToString() + " MshC");
             caseSummary.text = "Case #" + (PlayerState.Instance.dayStats.Count).ToString();
+            currentCase = PlayerState.Instance.dayStats.Count;
+
         }
         else
         {
@@ -460,5 +472,23 @@ public class HUD : MonoBehaviour
         {
             toolPrices[i].text = (DayManager.Instance.toolSelection[i].price + DayManager.Instance.priceIncrease).ToString() + " MshC";
         }
+    }
+
+    public void TurnUVLightOn()
+    {
+        uvLight.DOFade(uvStrength, uvSpeed);
+    }
+    public void TurnUVLightOff()
+    {
+        uvLight.DOFade(0, uvSpeed);
+    }
+
+    public void ShowToolResults()
+    {
+
+    }
+    public void SaveToolResults()
+    {
+
     }
 }
