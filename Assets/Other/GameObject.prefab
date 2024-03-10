@@ -45,7 +45,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fungiList:
-  - {fileID: 45779674145852959, guid: 7eca074cd0112fa43826358e2bc2c995, type: 3}
+  - {fileID: 45779674145852959, guid: ad02e5e96114ddd409b85a219e3414fa, type: 3}
+  - {fileID: 45779674145852959, guid: 8e4ce122f09ebd24fb2149ecbd673055, type: 3}
+  - {fileID: 45779674145852959, guid: ed518cfb2d1407a4eaefc50f8f86313c, type: 3}
+  - {fileID: 45779674145852959, guid: 348ac97920162e446b034a0d6990e9ae, type: 3}
+  - {fileID: 45779674145852959, guid: b08ca7fc63873134fb392784aad35423, type: 3}
+  - {fileID: 45779674145852959, guid: 63667a4c1c1d727409cadf726ad86d39, type: 3}
+  - {fileID: 45779674145852959, guid: 815f03c62ba74ae44b080c1d985ce17c, type: 3}
+  - {fileID: 45779674145852959, guid: 6ee22dfe9a6bd0b489718f78e42c249b, type: 3}
+  - {fileID: 45779674145852959, guid: 39d4b712fdd71ad4192c32737c342632, type: 3}
+  - {fileID: 45779674145852959, guid: d9838b2069c5a68498881b0716013f23, type: 3}
+  - {fileID: 45779674145852959, guid: 1f14d3bd7229a1e4fa748a667c4aeaaa, type: 3}
+  - {fileID: 45779674145852959, guid: bfa977314591ba14a8746df39fa651c1, type: 3}
+  - {fileID: 45779674145852959, guid: 9d9216c3498543a44b8a04a56260c9cf, type: 3}
+  - {fileID: 45779674145852959, guid: 858818d68378a2143abede98fbd453a1, type: 3}
+  - {fileID: 45779674145852959, guid: 1794550c5e15a6c4b9f3d82845c0e858, type: 3}
+  - {fileID: 45779674145852959, guid: ddb3ddfd810e5cd42b0c2cf07b6ae590, type: 3}
   organList:
   - {fileID: 3135866184504355558, guid: a57b810ef4aa86e41aa1e7fd5407c6e1, type: 3}
   - {fileID: 3135866184504355558, guid: aec07a94328ee9d4fb44438108dd6504, type: 3}
