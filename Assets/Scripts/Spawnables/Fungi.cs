@@ -208,6 +208,12 @@ public class Fungi : MonoBehaviour
     }
 
 
+    public void ScaleCase(float scale)
+    {
+        transform.localScale = Vector3.one*scale;
+        attachedOrgan.transform.localScale = Vector3.one*scale;
+    }
+
 }
 
 

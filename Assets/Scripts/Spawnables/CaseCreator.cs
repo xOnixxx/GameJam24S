@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Windows;
 
 public class CaseCreator : MonoBehaviour
 {
@@ -12,6 +13,13 @@ public class CaseCreator : MonoBehaviour
     public List<GameObject> organList;
 
 
+    (Fungi, Organ) activeCase;
+
+    private void OnMouseDown()
+    {
+        Debug.Log("DELETING");
+        DeleteCase(activeCase);
+    }
 
     public (Fungi, Organ) GenerateCase()
     {
@@ -22,7 +30,7 @@ public class CaseCreator : MonoBehaviour
         PlaceOrgan(organ, fungi);
         fungi.GetComponent<Fungi>().Infect(organ);
         (Fungi,Organ) temp1 = (fungi.GetComponent<Fungi>(), organ.GetComponent<Organ>());
-
+        activeCase = temp1;
         return temp1;
     }
 
@@ -33,18 +41,32 @@ public class CaseCreator : MonoBehaviour
         Transform tO = organ.transform;
         Transform tF = fungi.transform;
 
-        SpriteRenderer rO = organ.GetComponentInChildren<SpriteRenderer>();
-        rO.enabled = true;
-
-
         tO.DOMove(new Vector3(0, -1f, 2), 1).SetEase(Ease.InCubic);
         tF.DOMove(new Vector3(0, -1f, 1), 1).SetEase(Ease.InCubic);
 
         tO.DOScale(new Vector3(2, 2, 1), 1);
         tF.DOScale(new Vector3(2, 2, 1), 1);
 
+    }
 
+
+
+    public void DeleteCase((Fungi, Organ) activeCase)
+    {
+        activeCase.Item2.transform.Find("VacuumEffect").GetComponent<ParticleSystem>().Play();
+        var sequence = DOTween.Sequence();
+        activeCase.Item1.transform.DOScale(new Vector3(0, 0, 0), 0.5f);
+        sequence.Append(activeCase.Item2.transform.DOScale(new Vector3(0, 0, 0), 0.5f));
+        //deleteParticle.Play();
+        sequence.AppendCallback(() =>
+        {
+            //activeCase.Item1.Die();
+            Destroy(activeCase.Item1.transform.GameObject());
+            Destroy(activeCase.Item2.transform.GameObject());
+        });
+        sequence.Play();
 
     }
+
 
 }
