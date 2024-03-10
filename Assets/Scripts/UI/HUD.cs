@@ -499,10 +499,10 @@ public class HUD : MonoBehaviour
         uvLight.DOFade(0, uvSpeed);
     }
 
-    public void ShowToolResults(int toolID, IToolResultImage popIm)
+    public void ShowToolResults(toolType type, IToolResultImage popIm)
     {
         popUpImage = popIm;
-        actualResults[toolID] = popUpImage;
+        actualResults[((int)type)] = popUpImage;
         popUp.DOAnchorMin(minmaxAnchorsPop[2],popSpeed);
         popUp.DOAnchorMax(minmaxAnchorsPop[3], popSpeed);
     }
