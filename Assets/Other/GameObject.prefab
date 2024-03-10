@@ -44,5 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd8f5e1750ae9e4fae9cdeda94e3317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fungiList: []
-  organList: []
+  fungiList:
+  - {fileID: 45779674145852959, guid: 7eca074cd0112fa43826358e2bc2c995, type: 3}
+  organList:
+  - {fileID: 3135866184504355558, guid: a57b810ef4aa86e41aa1e7fd5407c6e1, type: 3}
+  - {fileID: 3135866184504355558, guid: aec07a94328ee9d4fb44438108dd6504, type: 3}
+  - {fileID: 3135866184504355558, guid: 29d29246a741b1a4985b6fb059bad955, type: 3}
+  - {fileID: 3135866184504355558, guid: d7626751ca5fce84cb8df9361c91004d, type: 3}
+  - {fileID: 3135866184504355558, guid: 2dab793d0f9a0e649912d36b871a3ae5, type: 3}

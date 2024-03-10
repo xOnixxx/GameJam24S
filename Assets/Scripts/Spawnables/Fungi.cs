@@ -184,7 +184,7 @@ public class Fungi : MonoBehaviour
 
     private void UVLightActive()
     {
-
+        HUD.Instance.TurnUVLightOn();
         foreach (GameObject fungiParts in spawnedParts)
         {
             fungiParts.GetComponent<SpriteRenderer>().color = uvColoring;
@@ -193,6 +193,7 @@ public class Fungi : MonoBehaviour
 
     private void UVLightOff()
     {
+        HUD.Instance.TurnUVLightOff();
         foreach (GameObject fungiParts in spawnedParts)
         {
             fungiParts.GetComponent<SpriteRenderer>().color = originalColor;
