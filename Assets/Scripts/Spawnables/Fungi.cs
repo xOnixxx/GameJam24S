@@ -135,7 +135,7 @@ public class Fungi : MonoBehaviour
         }
         else
         {
-            if (PlayerState.Instance.currentMoney > (activeTool.price + DayManager.Instance.priceIncrease))
+            if (PlayerState.Instance.currentMoney >= (activeTool.price + DayManager.Instance.priceIncrease))
             {
                 PlayerState.Instance.UpdateCurrentMoney(-(int)(activeTool.price + DayManager.Instance.priceIncrease));
                 if (Random.value < activeTool.dependency)
@@ -172,7 +172,7 @@ public class Fungi : MonoBehaviour
                     HUD.Instance.ReportSuccess(false);
                 }
                 else { HUD.Instance.ShowToolResults(activeTool.toolName, activeTool.GetComponent<IToolResultImage>());
-                    SoundManager.Instance.PlaySound("SlashCut");
+                    //SoundManager.Instance.PlaySound("SlashCut");
                 }
                 break;
             case toolType.syringeCheap:

@@ -597,6 +597,6 @@ public class HUD : MonoBehaviour
     }
     public void UpdateCaseNumber()
     {
-        caseNumber.text = PlayerState.Instance.dayStats.Count.ToString();
+        caseNumber.text = "Case #" + PlayerState.Instance.dayStats.Count.ToString();
     }
 }

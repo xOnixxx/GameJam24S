@@ -202,6 +202,7 @@ public class DayManager : MonoBehaviour
         HandOffOrgan(income, penalty, currentToolCost);
         creator.DeleteCase(currentCase);
         HUD.Instance.ResetFateChoice();
+        HUD.Instance.UpdateCaseNumber();
         chosenFungi = false;
         hasActiveCase = false;
     }
