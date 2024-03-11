@@ -50,6 +50,7 @@ public class HUD : MonoBehaviour
     public float resultsSpeed = 0.5f;
     [Header("Guberment Panel")]
     public RectTransform gubermentPanel;
+    public Text caseNumber;
     public Vector2 minimumMinAnchorGov = new(-0.4f, 0.55f);
     public Vector2 minimumMaxAnchorGov = new(0.04f, 0.95f);
     public Vector2 maximumMinAnchorGov = new(0f, 0.55f);
@@ -525,6 +526,29 @@ public class HUD : MonoBehaviour
         popUp.DOAnchorMin(minmaxAnchorsPop[2],popSpeed);
         popUp.DOAnchorMax(minmaxAnchorsPop[3], popSpeed);
         RevealTab((int)type);
+        string newText = "";
+        switch(type)
+        {
+            case toolType.scalpel:
+                newText = "Incision with mycellium";
+                break;
+            case toolType.fastGrowth:
+                newText = "Fruiting Body";
+                break;
+            case toolType.UVlight:
+                newText = "Colour under UV";
+                break;
+            case toolType.sporeDetector:
+                newText = "Spore presence";
+                break;
+            case toolType.syringeCheap:
+                newText = "Blood Sample";
+                break;
+            case toolType.syringeExpansive:
+                newText = "Blood Sample";
+                break;
+        }
+        popUpText.text = newText;
     }
     public void SaveToolResults()
     {
@@ -570,5 +594,9 @@ public class HUD : MonoBehaviour
     public void ApplyTool()
     {
         DayManager.Instance.currentCase.Item1.ApplyTool();
+    }
+    public void UpdateCaseNumber()
+    {
+        caseNumber.text = "Case #" + PlayerState.Instance.dayStats.Count.ToString();
     }
 }

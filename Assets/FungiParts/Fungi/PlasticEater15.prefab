@@ -56,11 +56,11 @@ MonoBehaviour:
   strongAgainst: 
   weakAgainst: 
   depthMycelium: 1
-  minCount: 0
-  maxCount: 0
-  minClusterS: 2
+  minCount: 1
+  maxCount: 1
+  minClusterS: 1
   maxClusterS: 3
-  minClusterCount: 2
+  minClusterCount: 1
   maxClusterCount: 3
   spreadSize: 0
   spread: 2

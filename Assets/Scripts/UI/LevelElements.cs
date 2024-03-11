@@ -29,30 +29,30 @@ public class LevelElements : MonoBehaviour
         {
             return;
         }
-        interactableFreezer.interactable = false;
-        interactableFreezer.blocksRaycasts = false;
+       // interactableFreezer.interactable = false;
+       // interactableFreezer.blocksRaycasts = false;
         DayManager.Instance.hasActiveCase = true;
         DayManager.Instance.GetNewOrgan();
         HUD.Instance.CheckConfirmEligibility();
         //Move whole line
-        foreach (var freezer in freezerLine)
+        /*foreach (var freezer in freezerLine)
         {
             freezer.DOAnchorMin(freezer.anchorMin + sizeOfFreezerMovement, speedOfFreezerMovement);
             freezer.DOAnchorMax(freezer.anchorMax + sizeOfFreezerMovement, speedOfFreezerMovement);
-        }
+        }*/
         //Afterwards move the last freezer to the top
-        StartCoroutine(ReturnFreezerToTop());
+        //StartCoroutine(ReturnFreezerToTop());
     }
 
     private IEnumerator ReturnFreezerToTop()
     {
         yield return new WaitForSeconds(speedOfFreezerMovement);
-        var lastFreezer = freezerLine[freezerLine.Count - 1];
-        lastFreezer.anchorMax = startOfLine + freezerHorizontalSize;
-        lastFreezer.anchorMin = startOfLine + sizeOfFreezerMovement;
-        freezerLine.RemoveAt(freezerLine.Count - 1);
-        freezerLine.Insert(0, lastFreezer);
-        interactableFreezer.interactable = true;
-        interactableFreezer.blocksRaycasts = true;
+        //var lastFreezer = freezerLine[freezerLine.Count - 1];
+        //lastFreezer.anchorMax = startOfLine + freezerHorizontalSize;
+        //lastFreezer.anchorMin = startOfLine + sizeOfFreezerMovement;
+        //freezerLine.RemoveAt(freezerLine.Count - 1);
+        //freezerLine.Insert(0, lastFreezer);
+       // interactableFreezer.interactable = true;
+        //interactableFreezer.blocksRaycasts = true;
     }
 }

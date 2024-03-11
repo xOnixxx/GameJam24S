@@ -1,9 +1,12 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+<<<<<<< HEAD
 using Unity.VisualScripting;
 using UnityEditor.Search;
 using UnityEditor.UI;
+=======
+>>>>>>> 55d08eef36401b1605f37253677a76f79b320f3b
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -148,7 +151,7 @@ public class Fungi : MonoBehaviour
         }
         else
         {
-            if (PlayerState.Instance.currentMoney > (activeTool.price + DayManager.Instance.priceIncrease))
+            if (PlayerState.Instance.currentMoney >= (activeTool.price + DayManager.Instance.priceIncrease))
             {
                 PlayerState.Instance.UpdateCurrentMoney(-(int)(activeTool.price + DayManager.Instance.priceIncrease));
                 if (Random.value < activeTool.dependency)
