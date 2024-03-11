@@ -24,13 +24,14 @@ public class fungiZone : MonoBehaviour
 
         for (int i = 0; i < size; i++)
         {
-            while (!polygon.OverlapPoint(new Vector2(x, y)) || attempt < 100)
+            Debug.Log("Start!");
+            while (!polygon.OverlapPoint(new Vector2(x, y)) && attempt < 10_000)
             {   
                x = Random.Range(boxBounds.min.x, boxBounds.max.x);
                y = Random.Range(boxBounds.min.y, boxBounds.max.y);
                attempt++; 
             }
-
+            Debug.Log("Finnish!");
             points.Add(new Vector3(x, y, 0));
             attempt = 0;
             x = 0;
@@ -52,7 +53,7 @@ public class fungiZone : MonoBehaviour
         //(x < (center.x - range) && x > (center.x + range) && y < (center.y - range) && y > (center.y + range)
         for (int i = 0; i < size; i++)
         {
-            while (!polygon.OverlapPoint(new Vector2(x, y)) || attempt > 10)
+            while (!polygon.OverlapPoint(new Vector2(x, y)) && attempt > 10_000)
             {
                 Debug.Log(attempt);
                 var temp = (Random.insideUnitCircle + new Vector2(center.x,center.y));

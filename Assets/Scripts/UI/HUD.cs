@@ -265,6 +265,7 @@ public class HUD : MonoBehaviour
     public void ChooseDetain()
     {
         DayManager.Instance.chosenFate = true;
+        DayManager.Instance.currentChoiceOfFate = FungiFate.Detain;
         CheckConfirmEligibility();
         SetCanvasGroup(detainButton, false);
         SetCanvasGroup(releaseButton, true);
@@ -272,6 +273,7 @@ public class HUD : MonoBehaviour
     public void ChooseRelease()
     {
         DayManager.Instance.chosenFate = true;
+        DayManager.Instance.currentChoiceOfFate = FungiFate.Release;
         CheckConfirmEligibility();
         SetCanvasGroup(detainButton, true);
         SetCanvasGroup(releaseButton, false);

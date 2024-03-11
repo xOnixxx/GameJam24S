@@ -203,6 +203,7 @@ public class DayManager : MonoBehaviour
         creator.DeleteCase(currentCase);
         HUD.Instance.ResetFateChoice();
         HUD.Instance.UpdateCaseNumber();
+        currentChoiceOfFate = FungiFate.None;
         chosenFungi = false;
         hasActiveCase = false;
     }
