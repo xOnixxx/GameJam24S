@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Search;
 using UnityEditor.UI;
 using UnityEngine;
@@ -52,10 +53,12 @@ public class Fungi : MonoBehaviour
     private List<GameObject> spawnedParts = new List<GameObject>();
 
     //TODO Spred types
-    public void Start()
+    public void Awake()
     {
-        spores = (Random.value < sporeProb);
-        isMature = (Random.value < matureProb);
+        spores = (Random.value <= sporeProb);
+        var r = Random.value;
+        Debug.Log(r);
+        isMature = (r <= matureProb);
     }
 
     public void Infect(GameObject Organ)
@@ -77,15 +80,23 @@ public class Fungi : MonoBehaviour
 
         if (isMature) { activeSprites = matureParts; }
         else{ activeSprites = immatureParts; }
-        foreach (Vector3 p in fungiPoint)
+        if (fungiPoint.Count != 0)
         {
+            Debug.Log("Is mature: " + isMature);
+            Debug.Log(activeSprites.Count);
+            Debug.Log(matureParts.Count);
+            foreach (Vector3 p in fungiPoint)
+            {
             
-            qr = Quaternion.Euler(0, 0, Random.Range(0, 90) - 45);
-            var t1 = Instantiate(activeSprites[Random.Range(0, activeSprites.Count - 1)], p, qr);
-            t1.transform.SetParent(this.transform,false);
-            t1.transform.localScale = t1.transform.localScale * ((float)Random.Range(70, 100) / 100);
-            spawnedParts.Add(t1);
+                qr = Quaternion.Euler(0, 0, Random.Range(0, 90) - 45);
+
+                var t1 = Instantiate(activeSprites[Random.Range(0, activeSprites.Count - 1)], p, qr);
+                t1.transform.SetParent(this.transform,false);
+                t1.transform.localScale = t1.transform.localScale * ((float)Random.Range(70, 100) / 100);
+                spawnedParts.Add(t1);
+            }
         }
+
 
 
     }

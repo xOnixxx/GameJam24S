@@ -5,16 +5,10 @@ using UnityEngine.EventSystems;
 
 public class FungiPart : MonoBehaviour
 {
-    /*
+    
     private void OnMouseDown()
     {
-
-
-        if (HUD.Instance.toolsOpened)
-        {
-            GetComponentInParent<Fungi>().UseTool();
-        }
-        else if (!HUD.Instance.encyOpened && !HUD.Instance.gubermentOpened && !HUD.Instance.resultsOpened)
+        if (!HUD.Instance.toolsOpened &&!HUD.Instance.encyOpened && !HUD.Instance.gubermentOpened && !HUD.Instance.resultsOpened)
         {
             if (GetComponentInParent<Fungi>().isZoomed)
             {
@@ -24,5 +18,5 @@ public class FungiPart : MonoBehaviour
         }
 
     }
-    */
+    
 }
