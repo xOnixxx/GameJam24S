@@ -1,12 +1,8 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-<<<<<<< HEAD
 using Unity.VisualScripting;
-using UnityEditor.Search;
-using UnityEditor.UI;
-=======
->>>>>>> 55d08eef36401b1605f37253677a76f79b320f3b
+
 using UnityEngine;
 using UnityEngine.UIElements;
 
